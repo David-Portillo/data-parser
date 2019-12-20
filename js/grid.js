@@ -1,11 +1,21 @@
-export const columnDefs = [
-  { headerName: "Make", field: "make" },
-  { headerName: "Model", field: "model" },
+import { validator } from "./validator.js";
+export const columns = [
+  {
+    headerName: "Make",
+    field: "make"
+    // cellStyle: function(params) {
+    //   console.log("maker params: ", params);
+    //   validator(params.column.colId, params.value);
+    // }
+  },
+  {
+    headerName: "Model",
+    field: "model",
+    cellClass: function(params) {
+      console.log("model params: ", params);
+      //validator(params.column.colId, params.value);
+      return validator(params.colDef.field, params.value);
+    }
+  },
   { headerName: "Price", field: "price" }
-];
-
-export const sampleData = [
-  { make: "Toyota", model: "Celica", price: 35000 },
-  { make: "Ford", model: "Mondeo", price: 32000 },
-  { make: "Porsche", model: "Boxter", price: 72000 }
 ];

@@ -1,10 +1,16 @@
-import { columnDefs, sampleData } from "./grid.js";
+import { columns } from "./grid.js";
+
+let sampleData = [
+  { make: "Toyota", model: "Celica", price: 35000 },
+  { make: "Ford", model: "Mondeo", price: 32000 },
+  { make: "Porsche", model: "Boxter", price: 72000 }
+];
 
 let gridOptions = {
   defaultColDef: {
     editable: true
   },
-  columnDefs,
+  columnDefs: columns,
   rowData: sampleData,
 
   // grid methods
@@ -21,9 +27,7 @@ let gridOptions = {
   }
 };
 
-console.log(columnDefs);
-console.log(sampleData);
-
+// Mount Ag-Grid to the DOM
 document.addEventListener("DOMContentLoaded", function() {
   let gridDiv = document.querySelector("#data-grid");
   new agGrid.Grid(gridDiv, gridOptions);
