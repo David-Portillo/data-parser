@@ -11,7 +11,7 @@ export const columns = [
   {
     headerName: "Model",
     field: "model",
-    cellClass: function(params) {
+    cellStyle: function(params) {
       console.log("model params: ", params);
       //validator(params.column.colId, params.value);
       return validator(params.colDef.field, params.value);
