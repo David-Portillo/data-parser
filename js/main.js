@@ -1,8 +1,24 @@
 import { columnDefs, sampleData } from "./grid.js";
 
 let gridOptions = {
+  defaultColDef: {
+    editable: true
+  },
   columnDefs,
-  rowData: sampleData
+  rowData: sampleData,
+
+  // grid methods
+
+  onGridReady: function(params) {
+    params.api.sizeColumnsToFit();
+  },
+  onCellEditingStarted: function(event) {
+    console.log("cellEditingStarted");
+  },
+  onCellEditingStopped: function(event) {
+    console.log("cellEditingStopped");
+    console.log(this.rowData);
+  }
 };
 
 console.log(columnDefs);
