@@ -17,10 +17,6 @@ const transmogrify = value => {
   return value;
 };
 
-const ruleParser = rule => {
-  console.log(rule instanceof Boolean);
-};
-
 const adjutant = {
   required: (field, rule, value, opt) => {
     if (
