@@ -1,7 +1,7 @@
 const fieldRules = {
   model: ["required|true|{equal: true}", "minLength|7", "maxLength|10"],
   make: ["maxLength|6"],
-  price: ["required|false", "maxLength|3"]
+  price: ["required|false"]
 };
 
 const advisableFields = ["price"];
