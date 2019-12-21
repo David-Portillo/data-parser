@@ -1,20 +1,20 @@
 const fieldRules = {
   model: ["required|true|{equal: true}", "minLength|7", "maxLength|10"],
   make: ["maxLength|6"],
-  price: ["required|false"]
+  price: ["required|false", "maxLength|3"]
 };
 
 const advisableFields = ["price"];
 
 const outcome = {
-  validField: { "background-color": "transparent" },
+  validField: { "background-color": "transparent", color: "white" },
   invalidField: { "background-color": "lightcoral" },
   advise: { "background-color": "papayawhip", color: "black" }
 };
 
 const transmogrify = value => {
   if (value === undefined || value === null) return "";
-  return value;
+  return value.toString();
 };
 
 const adjutant = {
