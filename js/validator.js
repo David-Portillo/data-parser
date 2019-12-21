@@ -1,3 +1,5 @@
+import { parseRule, parseOption } from "./utils/parser.js";
+
 const fieldRules = {
   model: ["required|true|{equal: true}", "minLength|7", "maxLength|10"],
   make: ["maxLength|6"],
@@ -20,7 +22,7 @@ const transmogrify = value => {
 const adjutant = {
   required: (field, rule, value, opt) => {
     if (
-      rule === "false" &&
+      !parseRule(rule) &&
       advisableFields.includes(field) &&
       transmogrify(value).length === 0
     )
