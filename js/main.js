@@ -2,7 +2,7 @@ import { columns } from "./grid.js";
 
 let sampleData = [
   { make: "Toyota", model: "Celica", price: 35000 },
-  { make: "Ford", model: "Mondeo", price: 32000 },
+  { make: "Ford", model: "Mustang", price: 32000 },
   { make: "Porsche", model: "Boxter", price: 72000 }
 ];
 
