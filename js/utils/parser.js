@@ -14,6 +14,8 @@ export const parseRule = rule => {
   return rule;
 };
 
+// parse opt object
+
 export const parseOption = opt => {
   try {
     return JSON.parse(opt);

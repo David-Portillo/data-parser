@@ -6,13 +6,13 @@ const fieldRules = {
   price: ["required|false"]
 };
 
-const advisableFields = ["price"];
-
 const outcome = {
   validField: { "background-color": "transparent", color: "white" },
   invalidField: { "background-color": "lightcoral" },
   advise: { "background-color": "papayawhip", color: "black" }
 };
+
+const advisableFields = ["price"];
 
 const transmogrify = value => {
   if (value === undefined || value === null) return "";
