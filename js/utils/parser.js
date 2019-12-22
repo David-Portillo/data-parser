@@ -1,3 +1,5 @@
+// Parse rule
+
 export const parseRule = rule => {
   if (rule === "true") return true;
   if (rule === "false") return false;
@@ -11,6 +13,7 @@ export const parseRule = rule => {
   }
   return rule;
 };
+
 export const parseOption = opt => {
   try {
     return JSON.parse(opt);

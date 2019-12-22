@@ -1,7 +1,7 @@
 import { parseRule, parseOption } from "./utils/parser.js";
 
 const fieldRules = {
-  model: ["required|true|{equal: true}", "minLength|7", "maxLength|10"],
+  model: ['required|true|{"equal": true}', "minLength|7", "maxLength|10"],
   make: ["maxLength|6"],
   price: ["required|false"]
 };
