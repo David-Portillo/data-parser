@@ -5,6 +5,10 @@ export const columns = [
     field: "make",
     cellStyle: function(params) {
       return validator(params.colDef.field, params.value);
+    },
+    tooltipComponent: "gridTooltip",
+    tooltipValueGetter: function(params) {
+      return { value: params.value };
     }
   },
   {

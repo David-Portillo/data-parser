@@ -1,4 +1,5 @@
 import { columns } from "./grid.js";
+import { gridTooltip } from "./utils/gridTooltip.js";
 
 let sampleData = [
   { make: "Toyota", model: "Celica", price: 35000 },
@@ -12,6 +13,7 @@ let gridOptions = {
   },
   columnDefs: columns,
   rowData: sampleData,
+  components: { gridTooltip },
 
   // grid methods
 
