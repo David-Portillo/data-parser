@@ -4,7 +4,7 @@ gridTooltip.prototype.init = function(params) {
   let eGui = (this.eGui = document.createElement("div"));
   eGui.classList.add("grid-tooltip");
 
-  console.log("in tooltip");
+  console.log("tooltip params: ", params);
   let valueToDisplay = params.value.value ? params.value.value : "- Missing -";
 
   eGui.innerHTML =

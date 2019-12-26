@@ -1,5 +1,5 @@
 import { columns } from "./grid.js";
-import { gridTooltip } from "./utils/gridTooltip.js";
+import { gridTooltip } from "./gridTooltip.js";
 
 let sampleData = [
   { make: "Toyota", model: "Celica", price: 35000 },
