@@ -1,0 +1,23 @@
+.grid-tooltip {
+  position: absolute;
+  width: 150px;
+  height: 70px;
+  border: 1px solid cornflowerblue;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 1s;
+  background-color: white;
+}
+
+.grid-tooltip.ag-tooltip-hiding {
+  opacity: 0;
+}
+
+.grid-tooltip p {
+  margin: 5px;
+  white-space: nowrap;
+}
+
+.grid-tooltip p:first-of-type {
+  font-weight: bold;
+}
