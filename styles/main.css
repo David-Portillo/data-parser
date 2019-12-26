@@ -5,6 +5,8 @@ body {
   font-family: "Fira Code";
 }
 
+/* update */
+
 #grid-container {
   display: flex;
   background-color: black;
