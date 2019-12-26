@@ -2,11 +2,11 @@
   position: absolute;
   width: 150px;
   height: 70px;
-  border: 1px solid cornflowerblue;
+  border: 1px solid lightgray;
   overflow: hidden;
   pointer-events: none;
   transition: opacity 1s;
-  background-color: white;
+  background-color: #2d3436;
 }
 
 .grid-tooltip.ag-tooltip-hiding {

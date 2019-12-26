@@ -7,7 +7,7 @@ body {
 
 #grid-container {
   display: flex;
-  background-color: black;
+  background-color: #2d3436;
   justify-content: center;
   margin: 2vw;
 }
