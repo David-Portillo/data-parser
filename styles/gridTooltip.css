@@ -1,7 +1,7 @@
 .grid-tooltip {
   position: absolute;
-  width: 150px;
-  height: 70px;
+  width: 300px;
+  height: 100px;
   border: 1px solid lightgray;
   overflow: hidden;
   pointer-events: none;
