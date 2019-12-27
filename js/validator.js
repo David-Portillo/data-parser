@@ -19,21 +19,6 @@ const transmogrify = value => {
   return value.toString();
 };
 
-const buildMessage = (field, adjutant, rule) => {
-  if (adjutant === "required")
-    return { passed: false, result: `${field} cannot be empty` };
-  else if (adjutant === "minLength")
-    return {
-      passed: false,
-      result: `${field} must be at least ${rule} characters long`
-    };
-  else if (adjutant === "maxLength")
-    return {
-      passed: false,
-      result: `${field} cannot be more than ${rule} characters`
-    };
-};
-
 const adjutant = {
   required: (field, rule, value, opt, yieldMessage = false) => {
     if (
@@ -44,7 +29,7 @@ const adjutant = {
       return { passed: false, result: outcome.advise };
     if (parseRule(rule) && transmogrify(value).length === 0)
       return yieldMessage
-        ? buildMessage(field, "required", rule)
+        ? { passed: false, result: `${field} cannot be empty` }
         : { passed: false, result: outcome.invalidField };
 
     return { passed: true, result: outcome.validField };
@@ -52,7 +37,10 @@ const adjutant = {
   minLength: (field, rule, value, opt, yieldMessage = false) => {
     if (transmogrify(value).length < rule)
       return yieldMessage
-        ? buildMessage(field, "minLength", rule)
+        ? {
+            passed: false,
+            result: `${field} must be at least ${rule} characters long`
+          }
         : { passed: false, result: outcome.invalidField };
     return { passed: true, result: outcome.validField };
   },
@@ -60,7 +48,10 @@ const adjutant = {
   maxLength: (field, rule, value, opt, yieldMessage = false) => {
     if (transmogrify(value).length > rule)
       return yieldMessage
-        ? buildMessage(field, "maxLength", rule)
+        ? {
+            passed: false,
+            result: `${field} cannot be more than ${rule} characters`
+          }
         : { passed: false, result: outcome.invalidField };
     return { passed: true, result: outcome.validField };
   }
