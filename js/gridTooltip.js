@@ -8,7 +8,7 @@ gridTooltip.prototype.init = function(params) {
 
   console.log("in grid tooltip");
 
-  const message = validator(fieldSpecification, params.colDef.field, params.value.value, true);
+  const { message = null} = validator(fieldSpecification, params.colDef.field, params.value.value, true);
   let valueToDisplay = params.value.value ? params.value.value : "- Missing -";
 
   eGui.innerHTML =
