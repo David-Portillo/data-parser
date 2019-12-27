@@ -24,3 +24,10 @@ export const parseOption = opt => {
   }
   return opt;
 };
+
+// parse value
+
+export const parseValue = value => {
+  if (value === undefined || value === null) return "";
+  return value.toString();
+};

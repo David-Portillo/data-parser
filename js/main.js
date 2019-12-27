@@ -1,4 +1,4 @@
-import { columns } from "./grid.js";
+import { columns } from "./gridSpec.js";
 import { gridTooltip } from "./gridTooltip.js";
 
 let sampleData = [

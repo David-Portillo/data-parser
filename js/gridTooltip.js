@@ -1,4 +1,5 @@
-import { validator } from "./validator.js";
+import { validator } from "./utils/validator.js";
+import {fieldSpecification} from './fieldSpec.js'
 export const gridTooltip = function() {};
 
 gridTooltip.prototype.init = function(params) {
@@ -7,7 +8,7 @@ gridTooltip.prototype.init = function(params) {
 
   console.log("in grid tooltip");
 
-  const message = validator(params.colDef.field, params.value.value, true);
+  const message = validator(fieldSpecification, params.colDef.field, params.value.value, true);
   let valueToDisplay = params.value.value ? params.value.value : "- Missing -";
 
   eGui.innerHTML =
