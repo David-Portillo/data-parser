@@ -1,6 +1,7 @@
 import { validator } from "./utils/validator.js";
 import { fieldSpecification } from './fieldSpec.js'
 
+const advisableFields = ['price']
 
 const fieldBackdrop = {
   valid: { "background-color": "transparent", color: "white" },
@@ -10,7 +11,7 @@ const fieldBackdrop = {
 
 const getBackdrop = (field, validated) => {
   if(validated === null) return fieldBackdrop.valid
-  if (!validated && fieldSpecification[field].advisable) return fieldBackdrop.advise
+  if (!validated && advisableFields.includes(field)) return fieldBackdrop.advise
   else if(!validated) return fieldBackdrop.invalid
   return fieldBackdrop.valid
 }
