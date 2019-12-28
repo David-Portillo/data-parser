@@ -5,14 +5,22 @@ body {
   font-family: "Fira Code";
 }
 
+.title-container {
+  display: flex;
+  justify-content: center;
+  margin: 1vw;
+}
+
 #grid-container {
   display: flex;
   background-color: #2d3436;
   justify-content: center;
-  margin: 2vw;
+  margin: 1vw;
 }
 
 #data-grid {
   height: 200px;
   width: 500px;
 }
+
+

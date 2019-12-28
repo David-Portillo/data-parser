@@ -9,9 +9,6 @@ const fieldBackdrop = {
 }
 
 const getBackdrop = (field, validated) => {
-  console.log('in get backdrop')
-  console.log('field: ', field)
-  console.log('advisable: ', fieldSpecification[field].advisable)
   if(validated === null) return fieldBackdrop.valid
   if (!validated && fieldSpecification[field].advisable) return fieldBackdrop.advise
   else if(!validated) return fieldBackdrop.invalid

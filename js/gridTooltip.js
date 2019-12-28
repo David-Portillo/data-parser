@@ -1,26 +1,32 @@
-import { validator } from "./utils/validator.js";
-import {fieldSpecification} from './fieldSpec.js'
+import { validator } from './utils/validator.js';
+import { fieldSpecification } from './fieldSpec.js';
+
 export const gridTooltip = function() {};
 
 gridTooltip.prototype.init = function(params) {
-  let eGui = (this.eGui = document.createElement("div"));
-  eGui.classList.add("grid-tooltip");
+	const { field = null } = params.colDef;
+	const { value = null } = params.value;
+	const { tag = null } = fieldSpecification[field];
+	const { passed = null, message = null } = validator(fieldSpecification, field,value);
 
-  console.log("in grid tooltip");
+	let eGui = (this.eGui = document.createElement('div'));
+	let valueToDisplay = value ? value : '- Missing -';
 
-  const { message = null} = validator(fieldSpecification, params.colDef.field, params.value.value, true);
-  let valueToDisplay = params.value.value ? params.value.value : "- Missing -";
-
-  eGui.innerHTML =
-    "<p>Maker name:</p>" +
-    "<p><span>" +
-    valueToDisplay +
-    "</span></p>" +
-    "<p><span>" +
-    message +
-    "</span></p>";
+	if(passed && (message === null || message.length === 0)) eGui.classList.add('none');
+	else {
+		eGui.classList.add('grid-tooltip');
+		eGui.innerHTML =
+			`<div class="tooltip-info">
+					<p>${tag}:</p>
+					<p>${valueToDisplay}</p>
+				</div>
+				<div class="tooltip-message">
+					<p>Note</p>
+					<p>${message}</p>
+			</div>`
+	}
 };
 
 gridTooltip.prototype.getGui = function() {
-  return this.eGui;
+	return this.eGui;
 };

@@ -2,20 +2,20 @@ import { parseRule, parseOption, parseValue } from "./parser.js";
 import { fieldMessage } from './messages.js'
 
 const adjutant = {
-  required: (field, rule, value, opt) => {
+  required: (rule, value, field, opt) => {
     if (parseRule(rule) && parseValue(value).length === 0)
-      return { passed: false, message: fieldMessage('required', field) }
+      return { passed: false, message: fieldMessage('required', null, rule, field,)}
     return { passed: true, message: '' };
   },
-  minLength: (field, rule, value, opt) => {
+  minLength: (rule, value, field, opt) => {
     if (parseValue(value).length < rule)
-      return  { passed: false, message: fieldMessage('minLength', field, parseValue(value), rule)}
+      return  { passed: false, message: fieldMessage('minLength', parseValue(value), rule, field)}
     return { passed: true, message: '' };
   },
 
-  maxLength: (field, rule, value, opt) => {
+  maxLength: (rule, value, field, opt) => {
     if (parseValue(value).length > rule)
-      return  { passed: false, message: fieldMessage('maxLength', field, parseValue(value), rule)}
+      return  { passed: false, message: fieldMessage('maxLength', parseValue(value), rule, field)}
     return { passed: true, message: '' };
   }
 };
@@ -25,9 +25,9 @@ export const validator = (fieldSpecification, field, value) => {
   
   for (const ruling of fieldSpecification[field].rules) {
     const [designation, rule, opt = null] = ruling.split("|");
-
+ 
     if (designation in adjutant) {
-      validation = adjutant[designation](field, rule, value, opt);
+      validation = adjutant[designation](rule, value, field, opt);
       if (!validation.passed) return validation;
     }
   }

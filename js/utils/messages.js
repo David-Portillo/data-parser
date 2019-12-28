@@ -1,7 +1,19 @@
-export const fieldMessage = (adjutant, field, value, rule) => {
-    if(adjutant === 'required') return `${field} cannot be empty`
-    else if(adjutant === 'minLength') return `${field} must be at least ${rule} characters long <br/> you've provided ${value.length}`
-    else if(adjutant === 'maxLength') return `${field} cannot be more than ${rule} characters <br /> you've provided ${value.length}`
-    return;
+import { fieldSpecification } from '../fieldSpec.js'
+
+const advisableFields = ["price"]
+
+export const fieldMessage = (adjutant, value, rule, field) => {
+    if(adjutant === 'required') {
+      return advisableFields.includes(field) ? 
+        `${fieldSpecification[field].tag} can be empty, but providing this<br/>information would help us determine the tax` : 
+        `${fieldSpecification[field].tag} cannot be empty`
+    } 
+    else if(adjutant === 'minLength') {
+      return `${fieldSpecification[field].tag} must be at least ${rule} characters long.<br/>You've provided ${value.length} characters`
+    }
+    else if(adjutant === 'maxLength') {
+      return `${fieldSpecification[field].tag} cannot exceed ${rule} characters.<br/>You've provided ${value.length} characters`
+    }
+      return;
   };
   
