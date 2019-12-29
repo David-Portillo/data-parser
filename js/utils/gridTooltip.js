@@ -1,13 +1,13 @@
-import { validator } from './utils/validator.js';
-import { fieldSpecification } from './fieldSpec.js';
+import { validator } from './validator.js';
+import { fieldSpecification as fieldSpec } from './fieldSpec.js';
 
 export const gridTooltip = function() {};
 
 gridTooltip.prototype.init = function(params) {
 	const { field = null } = params.colDef;
 	const { value = null } = params.value;
-	const { tag = null } = fieldSpecification[field];
-	const { passed = null, message = null } = validator(fieldSpecification, field,value);
+	const { tag = null } = fieldSpec[field];
+	const { passed = null, message = null } = validator(fieldSpec, field,value);
 
 	let eGui = (this.eGui = document.createElement('div'));
 	let valueToDisplay = value ? value : '- Missing -';

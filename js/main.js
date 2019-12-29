@@ -1,5 +1,5 @@
-import { columns } from "./gridSpec.js";
-import { gridTooltip } from "./gridTooltip.js";
+import { columns } from "./utils/gridSpec.js";
+import { gridTooltip } from "./utils/gridTooltip.js";
 
 let sampleData = [
   { make: "Toyota", model: "Celica", price: 35000 },

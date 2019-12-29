@@ -1,7 +1,5 @@
-import { validator } from "./utils/validator.js";
-import { fieldSpecification } from './fieldSpec.js'
-
-const advisableFields = ['price']
+import { validator } from "./validator.js";
+import { fieldSpecification as fieldSpec } from './fieldSpec.js'
 
 const fieldBackdrop = {
   valid: { "background-color": "transparent", color: "white" },
@@ -9,9 +7,8 @@ const fieldBackdrop = {
   advise: { "background-color": "papayawhip", color: "black" }
 }
 
-const getBackdrop = (field, validated) => {
-  if(validated === null) return fieldBackdrop.valid
-  if (!validated && advisableFields.includes(field)) return fieldBackdrop.advise
+const getBackdrop = (validated, advisable) => {
+  if(advisable) return fieldBackdrop.advise
   else if(!validated) return fieldBackdrop.invalid
   return fieldBackdrop.valid
 }
@@ -20,8 +17,8 @@ export const columns = [
     headerName: "Make",
     field: "make",
     cellStyle: function(params) {
-      const { passed = null } = validator(fieldSpecification,params.colDef.field, params.value);
-      return getBackdrop('make', passed)
+      const { passed = null, advisable = null } = validator(fieldSpec,params.colDef.field, params.value);
+      return getBackdrop(passed, advisable)
     },
     tooltipComponent: "gridTooltip",
     tooltipValueGetter: function(params) {
@@ -32,8 +29,8 @@ export const columns = [
     headerName: "Model",
     field: "model",
     cellStyle: function(params) {
-      const { passed = null } = validator(fieldSpecification,params.colDef.field, params.value);
-      return getBackdrop('model', passed)
+      const { passed = null, advisable = null } = validator(fieldSpec,params.colDef.field, params.value);
+      return getBackdrop(passed, advisable)
     },
     tooltipComponent: "gridTooltip",
     tooltipValueGetter: function(params) {
@@ -44,8 +41,8 @@ export const columns = [
     headerName: "Price",
     field: "price",
     cellStyle: function(params) {
-      const { passed = null} = validator(fieldSpecification,params.colDef.field, params.value);
-      return getBackdrop('price', passed)
+      const { passed = null, advisable = null } = validator(fieldSpec,params.colDef.field, params.value);
+      return getBackdrop(passed, advisable)
     },
     tooltipComponent: "gridTooltip",
     tooltipValueGetter: function(params) {
