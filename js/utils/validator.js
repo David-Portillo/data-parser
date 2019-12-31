@@ -1,62 +1,60 @@
 import { fieldMessage } from './messages.js';
 
-const parseRule = (rule, object = false) => {
-	if(!object) {
-		if (rule === 'true') return true;
-		if (rule === 'false') return false;
-		if (!isNaN(rule)) {
+const parser = ({ value, isObject = false, type = 'rule' }) => {
+	if(type === 'value'){
+		if (value === undefined || value === null) return ''
+		return value.toString()
+	}
+	else if (type === 'rule') {
+		if (!isObject) {
+			if (value === 'true') return true;
+			if (value === 'false') return false;
+			if (!isNaN(value)) {
+				try {
+					if (`'${value}'`.includes('.')) return parseFloat(value);
+					return parseInt(value);
+				} catch (error) {
+					console.log(`unable to parse ${value} error: ${error}`);
+				}
+			}
+		}
+		else if (isObject) {
 			try {
-				if (`'${rule}'`.includes('.')) return parseFloat(rule);
-				return parseInt(rule);
+				return JSON.parse(value);
 			} catch (error) {
-				console.log(`unable to parse ${rule} error: ${error}`);
+				console.log(`unable to parse object value ${value} error: ${error}`);
 			}
 		}
 	}
-	else if(object) {
-		try {
-			return JSON.parse(rule);
-		} catch (error) {
-			console.log(`unable to parse object rule ${rule} error: ${error}`);
-		}
-	}
-	
-
-	return rule;
-};
-
-const parseValue = (value) => {
-	if (value === undefined || value === null) return '';
-	return value.toString();
 };
 
 const adjutant = {
 	advisable : (rule, value, field) => {
-		if (parseValue(value).length === 0)
+		if (parser({value, type: 'value'}).length === 0)
 			return { passed: false, message: fieldMessage('advisable', null, rule, field), advisable: true };
 		return { passed: true, message: '' };
 	},
 	required  : (rule, value, field) => {
-		if (parseRule(rule) && parseValue(value).length === 0)
+		if (parser({value: rule}) && parser({value, type: 'value'}).length === 0)
 			return { passed: false, message: fieldMessage('required', null, rule, field) };
 		return { passed: true, message: '' };
 	},
 	minLength : (rule, value, field) => {
-		if (parseValue(value).length < rule)
-			return { passed: false, message: fieldMessage('minLength', parseValue(value), rule, field) };
+		if (parser({value, type: 'value'}).length < parser({value: rule}))
+			return { passed: false, message: fieldMessage('minLength', parser({ value, type: 'value' }), rule, field) };
 		return { passed: true, message: '' };
 	},
 	maxLength : (rule, value, field) => {
-		if (parseValue(value).length > rule)
-			return { passed: false, message: fieldMessage('maxLength', parseValue(value), rule, field) };
+		if (parser({ value, type: 'value' }).length > parser({ value: rule }))
+			return { passed: false, message: fieldMessage('maxLength', parser({ value, type: 'value' }), rule, field) };
 		return { passed: true, message: '' };
 	},
 	numbersOnly: (rule, value, field) => {
-		const { min = null, max = null, decimals = null, padding = null } = parseRule(rule, true)
-		console.log("min: ", min)
-		console.log("max: ", max)
-		console.log("decimals: ", decimals)
-		console.log("padding: ", padding)
+		const { minValue = null, maxValue = null } = parser({value: rule, isObject: true});
+
+		if (isNaN(parser({ value, type: 'value' }))) return { passed: false, message: fieldMessage('numbersOnly', parser(value), rule, field) };
+		if (minValue && parser({ value, type: 'value' }) < parser(minValue)) return { passed: false, message: fieldMessage('numbersOnly->minValue', parser({ value, type: 'value' }), minValue, field) };
+		if (maxValue && parser({ value, type: 'value' }) > parser(maxValue)) return { passed: false, message: fieldMessage('numbersOnly->maxValue', parser({ value, type: 'value' }), maxValue, field) };
 		return { passed: true, message: '' };
 	}
 };

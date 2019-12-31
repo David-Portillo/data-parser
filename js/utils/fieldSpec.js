@@ -13,8 +13,7 @@ export const fieldSpecification = {
     id: "price",
     tag: "Price",
     rules: [
-      "advisable",
-      'numbersOnly|{"min": "1.00", "max" : "indef", "decimals": 2, "padding" : "4:-"}'
+      "advisable",'numbersOnly|{"minValue": "100.50", "maxValue": "100000"}'
     ]
   }
 };
