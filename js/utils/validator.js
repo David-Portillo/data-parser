@@ -1,16 +1,27 @@
 import { fieldMessage } from './messages.js';
 
-const parseRule = (rule) => {
-	if (rule === 'true') return true;
-	if (rule === 'false') return false;
-	if (!isNaN(rule)) {
-		try {
-			if (`'${rule}'`.includes('.')) return parseFloat(rule);
-			return parseInt(rule);
-		} catch (error) {
-			console.log(`unable to parse ${rule} error: ${error}`);
+const parseRule = (rule, object = false) => {
+	if(!object) {
+		if (rule === 'true') return true;
+		if (rule === 'false') return false;
+		if (!isNaN(rule)) {
+			try {
+				if (`'${rule}'`.includes('.')) return parseFloat(rule);
+				return parseInt(rule);
+			} catch (error) {
+				console.log(`unable to parse ${rule} error: ${error}`);
+			}
 		}
 	}
+	else if(object) {
+		try {
+			return JSON.parse(rule);
+		} catch (error) {
+			console.log(`unable to parse object rule ${rule} error: ${error}`);
+		}
+	}
+	
+
 	return rule;
 };
 
@@ -38,6 +49,14 @@ const adjutant = {
 	maxLength : (rule, value, field) => {
 		if (parseValue(value).length > rule)
 			return { passed: false, message: fieldMessage('maxLength', parseValue(value), rule, field) };
+		return { passed: true, message: '' };
+	},
+	numbersOnly: (rule, value, field) => {
+		const { min = null, max = null, decimals = null, padding = null } = parseRule(rule, true)
+		console.log("min: ", min)
+		console.log("max: ", max)
+		console.log("decimals: ", decimals)
+		console.log("padding: ", padding)
 		return { passed: true, message: '' };
 	}
 };
