@@ -53,8 +53,8 @@ const adjutant = {
 		const { minValue = null, maxValue = null } = parser({value: rule, isObject: true});
 
 		if (isNaN(parser({ value, type: 'value' }))) return { passed: false, message: fieldMessage('numbersOnly', parser(value), rule, field) };
-		if (minValue && parser({ value, type: 'value' }) < parser(minValue)) return { passed: false, message: fieldMessage('numbersOnly->minValue', parser({ value, type: 'value' }), minValue, field) };
-		if (maxValue && parser({ value, type: 'value' }) > parser(maxValue)) return { passed: false, message: fieldMessage('numbersOnly->maxValue', parser({ value, type: 'value' }), maxValue, field) };
+		if (minValue && parser({ value, type: 'value' }) < parser({value: minValue})) return { passed: false, message: fieldMessage('numbersOnly->minValue', parser({ value, type: 'value' }), minValue, field) };
+		if (maxValue && parser({ value, type: 'value' }) > parser({value: maxValue})) return { passed: false, message: fieldMessage('numbersOnly->maxValue', parser({ value, type: 'value' }), maxValue, field) };
 		return { passed: true, message: '' };
 	}
 };
