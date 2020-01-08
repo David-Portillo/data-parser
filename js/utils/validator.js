@@ -23,7 +23,7 @@ const parseRule = ({rule, isObject = false }) => {
 
 const parseValue = (value) => {
 	if (value === undefined || value === null) return '';
-	else return value.toString();
+	else return value
 };
 
 const adjutant = {
@@ -78,8 +78,9 @@ const adjutant = {
 	},
 	dateField   : (r, v, field) => {
 		const value = parseValue(v)
-		const rule = parseRule({rule: r})
-		if (!moment(value).isValid()) return {passed: false, message: fieldMessage('dateField', value, rule, field)};
+		const {format = 'YYYY-MM-DD'} = parseRule({rule: r, isObject: true})
+
+		if (format && !moment(value, format, true).isValid()) return {passed: false, message: fieldMessage('dateField->format', value, format, field)}
 		return {passed: true, message: ''};
 	}
 };
