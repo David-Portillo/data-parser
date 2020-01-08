@@ -1,67 +1,85 @@
 import {fieldMessage} from './messages.js';
 
-const parser = ({value, isObject = false, type = 'rule'}) => {
-	if (type === 'value') {
-		if (value === undefined || value === null) return '';
-		return value.toString();
-	} else if (type === 'rule') {
-		if (!isObject) {
-			if (value === 'true') return true;
-			if (value === 'false') return false;
-			if (!isNaN(value)) {
-				try {
-					if (`'${value}'`.includes('.')) return parseFloat(value);
-					return parseInt(value);
-				} catch (error) {
-					console.log(`unable to parse ${value} error: ${error}`);
-				}
-			}
-		} else if (isObject) {
+const parseRule = ({rule, isObject = false }) => {
+	if (!isObject) {
+		if (rule === 'true') return true;
+		if (rule === 'false') return false;
+		if (!isNaN(rule)) {
 			try {
-				return JSON.parse(value);
+				if (`'${rule}'`.includes('.')) return parseFloat(rule);
+				return parseInt(rule);
 			} catch (error) {
-				console.log(`unable to parse object value ${value} error: ${error}`);
+				console.log(`unable to parse ${rule} error: ${error}`);
 			}
+		}
+	} else if (isObject) {
+		try {
+			return JSON.parse(rule);
+		} catch (error) {
+			console.log(`unable to parse object rule ${rule} error: ${error}`);
 		}
 	}
 };
 
+const parseValue = (value) => {
+	if (value === undefined || value === null) return '';
+	else return value.toString();
+};
+
 const adjutant = {
-	advisable   : (rule, value, field) => {
-		if (parser({value, type: 'value'}).length === 0)
+	advisable   : (r, v, field) => {
+		const value = parseValue(v)
+		const rule = parseValue(r)
+		if (value.length === 0)
 			return {passed: false, message: fieldMessage('advisable', null, rule, field), advisable: true};
 		return {passed: true, message: ''};
 	},
-	required    : (rule, value, field) => {
-		if (parser({value: rule}) && parser({value, type: 'value'}).length === 0)
+	required    : (r, v, field) => {
+		const value = parseValue(v)
+		const rule = parseRule({rule: r})
+
+		if (rule && value.length === 0)
 			return {passed: false, message: fieldMessage('required', null, rule, field)};
 		return {passed: true, message: ''};
 	},
-	minLength   : (rule, value, field) => {
-		if (parser({value, type: 'value'}).length < parser({value: rule}))
-			return {passed: false, message: fieldMessage('minLength', parser({value, type: 'value'}), rule, field)};
-		return {passed: true, message: ''};
-	},
-	maxLength   : (rule, value, field) => {
-		if (parser({value, type: 'value'}).length > parser({value: rule}))
-			return {passed: false, message: fieldMessage('maxLength', parser({value, type: 'value'}), rule, field)};
-		return {passed: true, message: ''};
-	},
-	numbersOnly : (rule, value, field) => {
-		const {minValue = null, maxValue = null} = parser({value: rule, isObject: true});
+	minLength   : (r, v, field) => {
+		const value = parseValue(v)
+		const rule = parseRule({rule: r})
 
-		if (isNaN(parser({value, type: 'value'})))
-			return {passed: false, message: fieldMessage('numbersOnly', parser(value), rule, field)};
-		if (minValue && parser({value, type: 'value'}) < parser({value: minValue}))
+		if (value.length < rule)
+			return {passed: false, message: fieldMessage('minLength', value, rule, field)};
+		return {passed: true, message: ''};
+	},
+	maxLength   : (r, v, field) => {
+		const value = parseValue(v)
+		const rule = parseRule({rule: r})
+
+		if (value > rule)
+			return {passed: false, message: fieldMessage('maxLength',value, rule, field)};
+		return {passed: true, message: ''};
+	},
+	numbersOnly : (r, v, field) => {
+		const value = parseValue(v)
+		const {minValue = null, maxValue = null} = parseRule({rule: r, isObject: true});
+
+		if (isNaN(value))
+			return {passed: false, message: fieldMessage('numbersOnly', value, r, field)};
+		if (minValue && value < minValue)
 			return {
 				passed  : false,
-				message : fieldMessage('numbersOnly->minValue', parser({value, type: 'value'}), minValue, field)
+				message : fieldMessage('numbersOnly->minValue', value, minValue, field)
 			};
-		if (maxValue && parser({value, type: 'value'}) > parser({value: maxValue}))
+		if (maxValue && value > maxValue)
 			return {
 				passed  : false,
-				message : fieldMessage('numbersOnly->maxValue', parser({value, type: 'value'}), maxValue, field)
+				message : fieldMessage('numbersOnly->maxValue', value, maxValue, field)
 			};
+		return {passed: true, message: ''};
+	},
+	dateField   : (r, v, field) => {
+		const value = parseValue(v)
+		const rule = parseRule({rule: r})
+		if (!moment(value).isValid()) return {passed: false, message: fieldMessage('dateField', value, rule, field)};
 		return {passed: true, message: ''};
 	}
 };

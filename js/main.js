@@ -2,9 +2,9 @@ import { columns } from './utils/gridSpec.js';
 import { gridTooltip } from './utils/gridTooltip.js';
 
 let sampleData = [
-	{ make: 'Toyota', model: 'Celica', price: 35000 },
-	{ make: 'Ford', model: 'Mustang', price: 32000 },
-	{ make: 'Porsche', model: 'Boxter', price: 72000 }
+	{ make: 'Toyota', model: 'Celica', price: 35000, date: '2020-10-20' },
+	{ make: 'Ford', model: 'Mustang', price: 32000, date: '2020-20-20' },
+	{ make: 'Porsche', model: 'Boxter', price: 72000, date: '2020-10-20' }
 ];
 
 let gridOptions = {
