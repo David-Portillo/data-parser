@@ -64,12 +64,12 @@ const adjutant = {
 
 		if (isNaN(value))
 			return {passed: false, message: fieldMessage('numbersOnly', value, r, field)};
-		if (minValue && value < minValue)
+		if ( minValue && value < parseRule({rule: minValue}))
 			return {
 				passed  : false,
 				message : fieldMessage('numbersOnly->minValue', value, minValue, field)
 			};
-		if (maxValue && value > maxValue)
+		if (maxValue && value > parseRule({rule: maxValue}))
 			return {
 				passed  : false,
 				message : fieldMessage('numbersOnly->maxValue', value, maxValue, field)
