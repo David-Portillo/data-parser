@@ -10,7 +10,7 @@ export const fieldMessage = (adjutant, value, rule, field) => {
 	else if (adjutant === 'numbersOnly') 			return `${fieldSpec[field].tag} can only be numbers`
 	else if (adjutant === 'numbersOnly->minValue') 	return `${fieldSpec[field].tag} must be at least ${rule}`
 	else if (adjutant === 'numbersOnly->maxValue') 	return `${fieldSpec[field].tag} cannot be more than ${rule}`
-	else if (adjutant === 'dateField') 				return `${fieldSpec[field].tag} value passed is invalid`
+	else if (adjutant === 'dateField') 				return `${fieldSpec[field].tag} field contains an invalid date`
 	else if (adjutant === 'dateField->format')		return `${fieldSpec[field].tag} invalid format, format must be: <br/> ${rule}`
 	return;
 };

@@ -57,7 +57,7 @@ const adjutant = {
 	},
 	numbersOnly : (r, v, field) => {
 		const value = parseValue(v);
-		const {minValue = null, maxValue = null} = parseRule({rule: r, isObject: true});
+		const {minValue = null, maxValue = null} = parseRule({rule: r || "{}", isObject: true});
 
 		if (isNaN(value)) return {passed: false, message: fieldMessage('numbersOnly', value, r, field)};
 		if (minValue && value < parseRule({rule: minValue}))
@@ -74,10 +74,18 @@ const adjutant = {
 	},
 	dateField   : (r, v, field) => {
 		const value = parseValue(v);
-		const {format = 'YYYY-MM-DD'} = parseRule({rule: r, isObject: true});
+		const defaultFormat = 'YYYY-MM-DD';
+		const {format = defaultFormat} = parseRule({rule: r || '{}', isObject: true});
 
-		if (format && !moment(value, format, true).isValid())
-			return {passed: false, message: fieldMessage('dateField->format', value, format, field)};
+		if (value.length > 0) {
+			// check for valid date, regardless of the format
+			if (!moment(value, defaultFormat, false).isValid())
+				return {passed: false, message: fieldMessage('dateField', value, format, field)};
+			// check for valid format
+			if (!moment(value, format, true).isValid())
+				return {passed: false, message: fieldMessage('dateField->format', value, format, field)};
+		}
+
 		return {passed: true, message: ''};
 	}
 };
