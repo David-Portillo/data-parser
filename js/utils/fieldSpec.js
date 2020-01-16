@@ -15,5 +15,10 @@ export const fieldSpecification = {
     rules: [
       "advisable",'numbersOnly|{"minValue": "100.50", "maxValue": "100000"}'
     ]
+  },
+  date: {
+    id: "date",
+    tag: "Date",
+    rules: ["required|false", 'dateField|{"format": "DD/MM/YYYY"}']
   }
 };

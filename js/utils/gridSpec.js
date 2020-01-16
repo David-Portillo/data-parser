@@ -14,7 +14,7 @@ const getBackdrop = (validated, advisable) => {
 };
 export const columns = [
 	{
-		headerName         : 'Make',
+		headerName         : fieldSpec['make'].tag,
 		field              : 'make',
 		cellStyle          : function(params) {
 			const { passed = null, advisable = null } = validator(fieldSpec, params.colDef.field, params.value);
@@ -26,7 +26,7 @@ export const columns = [
 		}
 	},
 	{
-		headerName         : 'Model',
+		headerName         : fieldSpec['model'].tag,
 		field              : 'model',
 		cellStyle          : function(params) {
 			const { passed = null, advisable = null } = validator(fieldSpec, params.colDef.field, params.value);
@@ -38,7 +38,7 @@ export const columns = [
 		}
 	},
 	{
-		headerName         : 'Price',
+		headerName         : fieldSpec['price'].tag,
 		field              : 'price',
 		cellStyle          : function(params) {
 			const { passed = null, advisable = null } = validator(fieldSpec, params.colDef.field, params.value);
@@ -48,5 +48,18 @@ export const columns = [
 		tooltipValueGetter : function(params) {
 			return { value: params.value };
 		}
+	},
+	{
+		headerName         : fieldSpec['date'].tag,
+		field              : 'date',
+		cellStyle          : function(params) {
+			const { passed = null, advisable = null } = validator(fieldSpec, params.colDef.field, params.value);
+			return getBackdrop(passed, advisable);
+		},
+		tooltipComponent   : 'gridTooltip',
+		tooltipValueGetter : function(params) {
+			return { value: params.value };
+		}
 	}
+
 ];
