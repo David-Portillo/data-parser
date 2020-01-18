@@ -77,7 +77,7 @@ const adjutant = {
 		const { format = moment.HTML5_FMT.DATE, identifier = '-' } = parseRule({ rule: r || '{}', isObject: true });
 
 		if (value.length > 0) {
-			if (value.split(identifier).length !== 3 )
+			if (value.split(identifier).length !== 3)
 				return { passed: false, message: fieldMessage('dateField->format', value, format, field) };
 
 			if (!moment(value, format, true).isValid()) {
