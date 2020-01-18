@@ -22,16 +22,17 @@ const parseRule = ({ rule, isObject = false }) => {
 };
 
 const parseValue = (value) => {
+	const isBlank = /^\s*$/
 	if (value === undefined || value === null) return '';
-	else return value;
+	else if (isBlank.test(value)) return value.trim();
+	else return value ;
 };
 
 const adjutant = {
 	advisable   : (r, v, field) => {
 		const value = parseValue(v);
-		const rule = parseValue(r);
 		if (value.length === 0)
-			return { passed: false, message: fieldMessage('advisable', null, rule, field), advisable: true };
+			return { passed: false, message: fieldMessage(`advisable->${field}`, null, r, field), advisable: true };
 		return { passed: true, message: '' };
 	},
 	required    : (r, v, field) => {

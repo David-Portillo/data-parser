@@ -12,6 +12,7 @@ const getBackdrop = (validated, advisable) => {
 	else if (!validated) return fieldBackdrop.invalid;
 	return fieldBackdrop.valid;
 };
+
 export const columns = [
 	{
 		headerName         : fieldSpec['make'].tag,
@@ -23,6 +24,9 @@ export const columns = [
 		tooltipComponent   : 'gridTooltip',
 		tooltipValueGetter : function(params) {
 			return { value: params.value };
+		},
+		valueGetter: function(params) {
+			return params.data.make.toString().trim()
 		}
 	},
 	{
@@ -35,6 +39,9 @@ export const columns = [
 		tooltipComponent   : 'gridTooltip',
 		tooltipValueGetter : function(params) {
 			return { value: params.value };
+		},
+		valueGetter: function(params) {
+			return params.data.model.toString().trim()
 		}
 	},
 	{
@@ -47,6 +54,9 @@ export const columns = [
 		tooltipComponent   : 'gridTooltip',
 		tooltipValueGetter : function(params) {
 			return { value: params.value };
+		},
+		valueGetter: function(params) {
+			return params.data.price.toString().trim()
 		}
 	},
 	{
@@ -59,6 +69,9 @@ export const columns = [
 		tooltipComponent   : 'gridTooltip',
 		tooltipValueGetter : function(params) {
 			return { value: params.value };
+		},
+		valueGetter: function(params) {
+			return params.data.date.toString().trim()
 		}
 	}
 
