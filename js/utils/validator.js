@@ -74,20 +74,23 @@ const adjutant = {
 	},
 	dateField   : (r, v, field) => {
 		const value = parseValue(v);
-		const { format = moment.HTML5_FMT.DATE, identifier = '-' } = parseRule({ rule: r || '{}', isObject: true });
+		const { format = moment.HTML5_FMT.DATE } = parseRule({ rule: r || '{}', isObject: true });
+		let separator = '-'
+
+		if (format.includes('.')) separator = '.'
+		else if (format.includes('/')) separator = '/'
+		else if (format.includes('-')) separator = '-'
+		else separator = '-'
 
 		if (value.length > 0) {
-			
-			const hasInvalidChar = value.split("").some(char => { return isNaN(char) && char !== identifier });
+			const hasInvalidChar = value.split("").some(char => { return isNaN(char) && char !== separator });
 
 			if (hasInvalidChar)
 				return { passed: false, message: fieldMessage('dateField->format', value, format, field) };
 
 			if (!moment(value, format, true).isValid()) {
 				const invalidAt = moment(value, format, true).invalidAt();
-
-				//console.log("invalid at: ", invalidAt)
-
+				
 				if (invalidAt === 0) return { passed: false, message: fieldMessage('dateField->year', value, format, field) };
 				if (invalidAt === 1) return { passed: false, message: fieldMessage('dateField->month', value, format, field) };
 				if (invalidAt === 2) return { passed: false, message: fieldMessage('dateField->day', value, format, field) };
