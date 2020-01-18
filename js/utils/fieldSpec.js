@@ -19,6 +19,6 @@ export const fieldSpecification = {
   date: {
     id: "date",
     tag: "Date",
-    rules: ["required|false", 'dateField|{"format": "DD/MM/YYYY"}']
+    rules: ["required|false", 'dateField|{"format": "DD/MM/YYYY", "identifier": "/"}']
   }
 };

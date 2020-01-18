@@ -1,6 +1,6 @@
-import {fieldMessage} from './messages.js';
+import { fieldMessage } from './messages.js';
 
-const parseRule = ({rule, isObject = false}) => {
+const parseRule = ({ rule, isObject = false }) => {
 	if (!isObject) {
 		if (rule === 'true') return true;
 		if (rule === 'false') return false;
@@ -31,82 +31,67 @@ const adjutant = {
 		const value = parseValue(v);
 		const rule = parseValue(r);
 		if (value.length === 0)
-			return {passed: false, message: fieldMessage('advisable', null, rule, field), advisable: true};
-		return {passed: true, message: ''};
+			return { passed: false, message: fieldMessage('advisable', null, rule, field), advisable: true };
+		return { passed: true, message: '' };
 	},
 	required    : (r, v, field) => {
 		const value = parseValue(v);
-		const rule = parseRule({rule: r});
+		const rule = parseRule({ rule: r });
 
-		if (rule && value.length === 0) return {passed: false, message: fieldMessage('required', null, rule, field)};
-		return {passed: true, message: ''};
+		if (rule && value.length === 0) return { passed: false, message: fieldMessage('required', null, rule, field) };
+		return { passed: true, message: '' };
 	},
 	minLength   : (r, v, field) => {
 		const value = parseValue(v);
-		const rule = parseRule({rule: r});
+		const rule = parseRule({ rule: r });
 
-		if (value.length < rule) return {passed: false, message: fieldMessage('minLength', value, rule, field)};
-		return {passed: true, message: ''};
+		if (value.length < rule) return { passed: false, message: fieldMessage('minLength', value, rule, field) };
+		return { passed: true, message: '' };
 	},
 	maxLength   : (r, v, field) => {
 		const value = parseValue(v);
-		const rule = parseRule({rule: r});
+		const rule = parseRule({ rule: r });
 
-		if (value > rule) return {passed: false, message: fieldMessage('maxLength', value, rule, field)};
-		return {passed: true, message: ''};
+		if (value > rule) return { passed: false, message: fieldMessage('maxLength', value, rule, field) };
+		return { passed: true, message: '' };
 	},
 	numbersOnly : (r, v, field) => {
 		const value = parseValue(v);
-		const {minValue = null, maxValue = null} = parseRule({rule: r || '{}', isObject: true});
+		const { minValue = null, maxValue = null } = parseRule({ rule: r || '{}', isObject: true });
 
-		if (isNaN(value)) return {passed: false, message: fieldMessage('numbersOnly', value, r, field)};
-		if (minValue && value < parseRule({rule: minValue}))
+		if (isNaN(value)) return { passed: false, message: fieldMessage('numbersOnly', value, r, field) };
+		if (minValue && value < parseRule({ rule: minValue }))
 			return {
 				passed  : false,
 				message : fieldMessage('numbersOnly->minValue', value, minValue, field)
 			};
-		if (maxValue && value > parseRule({rule: maxValue}))
+		if (maxValue && value > parseRule({ rule: maxValue }))
 			return {
 				passed  : false,
 				message : fieldMessage('numbersOnly->maxValue', value, maxValue, field)
 			};
-		return {passed: true, message: ''};
+		return { passed: true, message: '' };
 	},
 	dateField   : (r, v, field) => {
 		const value = parseValue(v);
-		const defaultFormat = 'YYYY-MM-DD';
-		const {format = defaultFormat} = parseRule({rule: r || '{}', isObject: true});
+		const { format = moment.HTML5_FMT.DATE, identifier = '-' } = parseRule({ rule: r || '{}', isObject: true });
 
-		console.log(value);
-		console.log('valid date: ', moment(value, defaultFormat, false).isValid());
-		console.log('invalid at: ', moment(value,defaultFormat, false).invalidAt());
+		if (value.length > 0) {
+			if (value.split(identifier).length !== 3 )
+				return { passed: false, message: fieldMessage('dateField->format', value, format, field) };
 
-		// check for valid date regardless of its format
-		if (value.length > 0 && !moment(value, defaultFormat, false).isValid() || moment(value,defaultFormat, false).invalidAt() === -1) {
-			let invalidAt = moment(value, defaultFormat, false).invalidAt();
-			if (invalidAt === 0) return {passed: false, message: fieldMessage('dateField->year', value, format, field)};
-			if (invalidAt === 1) return {passed: false, message: fieldMessage('dateField->month', value, format, field)};
-			if (invalidAt === 2) return {passed: false, message: fieldMessage('dateField->day', value, format, field)};
-			
-			if(invalidAt === -1) {
-				console.log("check for format")
-				console.log(moment(value, format, true).isValid())
-				if(!moment(value, format, true).isValid())
-					return {passed: false, message: fieldMessage('dateField->format', value, format, field)};
+			if (!moment(value, format, true).isValid()) {
+				const invalidAt = moment(value, format, true).invalidAt();
+
+				if (invalidAt === 0) return { passed: false, message: fieldMessage('dateField->year', value, format, field) };
+				if (invalidAt === 1) return { passed: false, message: fieldMessage('dateField->month', value, format, field) };
+				if (invalidAt === 2) return { passed: false, message: fieldMessage('dateField->day', value, format, field) };
+
+				return { passed: false, message: fieldMessage('dateField->unknown', value, format, field) };
 			}
-			
-			//return {passed: false, message: fieldMessage('dateField->unknown', value, format, field)};
 		}
 
-		// check for valid date format
-		// if (value.length > 0 && !moment(value, format, true).isValid()) {
-		// 	let invalidAt = moment(value, format, true).invalidAt();
-		// 	console.log('invalid at: ', moment(value, format, true).invalidAt());
-			
-		// 	return {passed: false, message: fieldMessage('dateField->format', value, format, field)};
-		// }
-
-		return {passed: true, message: ''};
+		return { passed: true, message: '' };
 	}
 };
 
