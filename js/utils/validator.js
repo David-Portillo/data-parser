@@ -75,12 +75,7 @@ const adjutant = {
 	dateField   : (r, v, field) => {
 		const value = parseValue(v);
 		const { format = moment.HTML5_FMT.DATE } = parseRule({ rule: r || '{}', isObject: true });
-		let separator = '-'
-
-		if (format.includes('.')) separator = '.'
-		else if (format.includes('/')) separator = '/'
-		else if (format.includes('-')) separator = '-'
-		else separator = '-'
+		const separator = format.split("").find(s => s === '.' || s === '/' || s === '-') || '-'
 
 		if (value.length > 0) {
 			const hasInvalidChar = value.split("").some(char => { return isNaN(char) && char !== separator });
