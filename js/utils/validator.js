@@ -77,11 +77,16 @@ const adjutant = {
 		const { format = moment.HTML5_FMT.DATE, identifier = '-' } = parseRule({ rule: r || '{}', isObject: true });
 
 		if (value.length > 0) {
-			if (value.split(identifier).length !== 3)
+			
+			const hasInvalidChar = value.split("").some(char => { return isNaN(char) && char !== identifier });
+
+			if (hasInvalidChar)
 				return { passed: false, message: fieldMessage('dateField->format', value, format, field) };
 
 			if (!moment(value, format, true).isValid()) {
 				const invalidAt = moment(value, format, true).invalidAt();
+
+				//console.log("invalid at: ", invalidAt)
 
 				if (invalidAt === 0) return { passed: false, message: fieldMessage('dateField->year', value, format, field) };
 				if (invalidAt === 1) return { passed: false, message: fieldMessage('dateField->month', value, format, field) };
