@@ -17,6 +17,7 @@ let gridOptions = {
 	columnDefs           : columns,
 	rowData              : sampleData,
 	components           : { gridTooltip },
+	enableCellChangeFlash: true,
 
 	// grid methods
 
@@ -29,7 +30,7 @@ let gridOptions = {
 	onCellEditingStopped : function(event) {
 		console.log('cellEditingStopped');
 		console.log(this.rowData);
-	}
+	},
 };
 
 // Mount Ag-Grid to the DOM
@@ -37,3 +38,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	let gridDiv = document.querySelector('#data-grid');
 	new agGrid.Grid(gridDiv, gridOptions);
 });
+
+window.onDragOver = (event) => {
+	sampleData[0].make = "new value"
+	console.log(gridOptions.api)
+	var params = {
+        force: true
+    };
+    gridOptions.api.refreshCells(params);
+	console.log(sampleData)
+	event.preventDefault();	
+}
+window.onDrop = (event) => {
+	console.log(event)
+
+}
