@@ -11,9 +11,17 @@ body {
   margin: 1vw;
 }
 
+#notification {
+  background-color: lightcoral;
+  border: 1px solid darkred;
+  height: 60px;
+  width: 100%;
+}
+
 #grid-container {
   display: flex;
   background-color: #2d3436;
+  border: 1px solid black;
   justify-content: center;
   margin: 1vw;
 }
