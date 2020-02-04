@@ -1,6 +1,12 @@
 import {columns} from './utils/gridSpec.js';
 import {gridTooltip} from './utils/gridTooltip.js';
 
+// global status tracking object
+let issues = {
+	errorCount  : 0,
+	uploadingOk : false
+};
+
 let sampleData = [
 	{make: 'Toyota', model: 'Celica', price: 35000, date: '2020-10-20'},
 	{make: 'Ford', model: 'Mustang', price: 32000, date: '2020-20-20'},
@@ -33,7 +39,7 @@ let gridOptions = {
 	}
 };
 
-// Mount Ag-Grid to the DOM
+// mount Ag-Grid to the DOM
 document.addEventListener('DOMContentLoaded', function() {
 	let gridDiv = document.querySelector('#data-grid');
 	new agGrid.Grid(gridDiv, gridOptions);
@@ -55,6 +61,6 @@ window.onDrop = (event) => {
 
 window.closeNotify = () => {
 	let notification = document.querySelector('#notify');
-	notification.setAttribute('hidden',"");
+	notification.setAttribute('hidden', '');
 	console.log(notification);
 };
