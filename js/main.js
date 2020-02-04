@@ -4,7 +4,8 @@ import {gridTooltip} from './utils/gridTooltip.js';
 // global status tracking object
 let issues = {
 	errorCount  : 0,
-	uploadingOk : false
+	uploadingOk : false,
+	parsingOk   : false
 };
 
 let sampleData = [
