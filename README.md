@@ -2,14 +2,32 @@
 
 ### Table of Contents
 
-* [Purpose]()
-* [File Structure]()
-* [File Explanation]()
-* [Plugins]()
+* Purpose
+* File Structure
+  - docs
+  - js
+    - utils
+  - plugins
+  - styles
+* File Docs
+  - [main.js]()
+  - [fieldSpec.js]()
+  - [notification.js]()
+  - [messages.js]()
+  - [gridSpec.js]()
+  - [gridTooltip.js]()
+  - [validator.js]()
+* Plugins
+  - Moment
+  - Ag-Grid
+  - XLSX
 
 
 -----------
 ## Purpose
+
+-----------
+## File Structure
 
 -----------
 
