@@ -2,26 +2,24 @@
 
 ### Table of Contents
 
-* Purpose
-* File Structure
+* [Purpose](https://github.com/HammerHand92/data-parser#purpose)
+* [File Structure](https://github.com/HammerHand92/data-parser#file-structure)
   - docs
   - js
-    - utils
   - plugins
   - styles
 * File Docs
-  - [main.js]()
-  - [fieldSpec.js]()
-  - [notification.js]()
-  - [messages.js]()
-  - [gridSpec.js]()
-  - [gridTooltip.js]()
-  - [validator.js]()
-* Plugins
+  - [main.js doc]()
+  - [fieldSpec.js doc]()
+  - [notification.js doc]()
+  - [messages.js doc]()
+  - [gridSpec.js doc]()
+  - [gridTooltip.js doc]()
+  - [validator.js doc]()
+* [Plugins](https://github.com/HammerHand92/data-parser#plugins)
   - Moment
   - Ag-Grid
   - XLSX
-
 
 -----------
 ## Purpose
