@@ -51,7 +51,7 @@ window.onDragOver = (event) => {
 	sampleData[0].make = 'new value';
 	console.log(gridOptions.api);
 	console.log("opening notification for testing")
-	showNotify();
+	showNotify("attempting to upload a file");
 	var params = {
 		force : true
 	};
