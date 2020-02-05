@@ -1,5 +1,6 @@
 import { columns } from './utils/gridSpec.js';
 import { gridTooltip } from './utils/gridTooltip.js';
+import { showNotify } from './utils/notification.js'
 
 // global status tracking object
 let trackerIssue = {
@@ -49,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
 window.onDragOver = (event) => {
 	sampleData[0].make = 'new value';
 	console.log(gridOptions.api);
+	console.log("opening notification for testing")
+	showNotify();
 	var params = {
 		force : true
 	};
