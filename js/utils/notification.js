@@ -1,5 +1,11 @@
+export const showNotify = () => {
+  let notify = document.querySelector('#notify');
+  notify.removeAttribute('hidden');
+  console.log(notify)
+}
+
 window.closeNotify = () => {
-	let notification = document.querySelector('#notify');
-	notification.setAttribute('hidden', '');
-	console.log(notification);
+	let notify = document.querySelector('#notify');
+	notify.setAttribute('hidden', '');
+	console.log(notify);
 };
