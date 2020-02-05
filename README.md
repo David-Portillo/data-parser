@@ -8,7 +8,7 @@
   - js
   - plugins
   - styles
-* File Docs
+* Docs
   - [main]()
   - [fieldSpec]()
   - [notification]()
