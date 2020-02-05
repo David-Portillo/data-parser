@@ -8,6 +8,10 @@
   - js
   - plugins
   - styles
+* [Plugins](https://github.com/HammerHand92/data-parser#plugins)
+  - Moment
+  - Ag-Grid
+  - XLSX
 * Docs
   - [main]()
   - [fieldSpec]()
@@ -16,10 +20,6 @@
   - [gridSpec]()
   - [gridTooltip]()
   - [validator]()
-* [Plugins](https://github.com/HammerHand92/data-parser#plugins)
-  - Moment
-  - Ag-Grid
-  - XLSX
 
 -----------
 ## Purpose
