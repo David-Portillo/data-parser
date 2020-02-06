@@ -30,6 +30,7 @@ body {
   border: 2px dashed black;
   width: 150px;
   padding: 20px;
+  user-select: none;
 }
 
 /* Ag-Grid */
