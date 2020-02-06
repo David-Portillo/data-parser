@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+    <!-- Styling & Icons -->
+
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href="./styles/main.css" rel="stylesheet" />
     <link href="./styles/gridTooltip.css" rel="stylesheet" />
 
+    <!-- Plugins -->
+
     <script lang="javascript" src='./plugins/moment.min.js'></script>
     <script lang="javascript" src="./plugins/ag-grid-community.min.js"></script>
     <script lang="javascript" src="./plugins/xlsx.full.min.js"></script>
+
+    <!-- Logic Schematics -->
 
     <script type="module" src="./js/utils/notification.js"></script>
     <script type="module" src="./js/main.js"></script>
@@ -20,18 +26,30 @@
   </head>
   <body>
     <main>
+      
+      <!-- Notification -->
+      
       <div id="notify">
           <p>This is a test</p>
         <div>
           <span id="notify-close" onclick="closeNotify();">close</span>
         </div>
       </div>
+
+      <!-- Main Container -->
+
       <div class="title-container">
         <h1>Data Parser</h1>
       </div>
+
+      <!-- Dropzone -->
+
       <div ondragover="onDragOver(event);" ondrop="onDrop(event)">
         <span> dropzone </span>
       </div>
+
+      <!-- Grid Container -->
+      
       <div id="grid-container">
         <div id="data-grid" class="ag-theme-balham-dark"></div>
       </div>
