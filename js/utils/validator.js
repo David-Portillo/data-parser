@@ -53,7 +53,7 @@ const adjutant = {
 		const value = parseValue(v);
 		const rule = parseRule({ rule: r });
 
-		if (value > rule) return { passed: false, message: fieldMessage('maxLength', value, rule, field) };
+		if (value.length > rule) return { passed: false, message: fieldMessage('maxLength', value, rule, field) };
 		return { passed: true, message: '' };
 	},
 	numbersOnly : (r, v, field) => {
