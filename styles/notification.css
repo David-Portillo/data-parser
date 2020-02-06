@@ -5,6 +5,7 @@
   text-align: center;
   padding-top: 15px;
   user-select: none;
+  margin: 25px 400px;
 }
 
 #notify > :nth-child(2) {
