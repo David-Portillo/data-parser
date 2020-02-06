@@ -5,6 +5,16 @@ body {
   font-family: "Fira Code";
 }
 
+/* Header */
+
+header {
+  display: block;
+  background-color: #d3d3d3;
+  box-shadow: 0px 2px 3px black;
+  width: 100%;
+  height: 85px;
+}
+
 /* Page Title */
 
 .title-container {
@@ -26,7 +36,7 @@ body {
 }
 
 #dropzone div {
-  background-color: 	#D3D3D3;
+  background-color: 	#d3d3d3;
   border: 2px dashed black;
   width: 150px;
   padding: 20px;
