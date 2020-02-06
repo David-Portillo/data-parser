@@ -8,18 +8,18 @@
   - js
   - plugins
   - styles
-* File Docs
-  - [main.js doc]()
-  - [fieldSpec.js doc]()
-  - [notification.js doc]()
-  - [messages.js doc]()
-  - [gridSpec.js doc]()
-  - [gridTooltip.js doc]()
-  - [validator.js doc]()
 * [Plugins](https://github.com/HammerHand92/data-parser#plugins)
   - Moment
   - Ag-Grid
   - XLSX
+* Docs
+  - [main]()
+  - [fieldSpec]()
+  - [notification]()
+  - [messages]()
+  - [gridSpec]()
+  - [gridTooltip]()
+  - [validator]()
 
 -----------
 ## Purpose
