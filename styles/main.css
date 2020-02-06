@@ -13,14 +13,34 @@ header {
   box-shadow: 0px 2px 3px black;
   width: 100%;
   height: 70px;
+  padding: 5px;
 }
 
-/* Page Title */
-
-.title-container {
+header div {
   display: flex;
+}
+
+/* Logo */
+
+#logo {
+  height: 70px;
+  background-color: cadetblue;
+  margin-right: 5px;
+  min-width: 90px;
+  opacity: 0.2;
+}
+
+/* Page title */
+
+#page-title {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 1vw;
+  height: 70px;
+  width: fit-content;
+  padding: 0px 5px 0px 20px;
+  border-left: 5px solid #d3d3d3;
+  color: #d3d3d3;
   user-select: none;
 }
 
@@ -33,6 +53,7 @@ header {
   /* background-color: cadetblue; */
   text-align: center;
   height: 100px;
+  margin: 25px;
 }
 
 #dropzone div {
