@@ -1,0 +1,21 @@
+#notify {
+  background-color: lightcoral;
+  border: 1px solid darkred;
+  height: 80px;
+  width: 100%;
+  text-align: center;
+  padding-top: 15px;
+  user-select: none;
+}
+
+#notify > :nth-child(2) {
+  display: block;
+  width: 98%;
+  text-align: right;
+  user-select: none;
+}
+
+#notify-close {
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -9,7 +9,8 @@
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href="./styles/main.css" rel="stylesheet" />
-    <link href="./styles/gridTooltip.css" rel="stylesheet" />
+    <link href="./styles/tooltip.css" rel="stylesheet" />
+    <link href="./styles/notification.css" rel="stylesheet" />
 
     <!-- Plugins -->
 
@@ -44,8 +45,10 @@
 
       <!-- Dropzone -->
 
-      <section ondragover="onDragOver(event);" ondrop="onDrop(event)">
-        <span> dropzone </span>
+      <section id="dropzone" ondragover="onDragOver(event);" ondrop="onDrop(event)">
+        <div>
+          <p> dropzone </p>
+        </div>
       </section>
 
       <!-- Grid Container -->
