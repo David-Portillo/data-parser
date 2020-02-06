@@ -5,6 +5,8 @@ body {
   font-family: "Fira Code";
 }
 
+/* Page Title */
+
 .title-container {
   display: flex;
   justify-content: center;
@@ -12,27 +14,25 @@ body {
   user-select: none;
 }
 
-#notify {
-  background-color: lightcoral;
-  border: 1px solid darkred;
-  height: 80px;
-  width: 100%;
+/* Dropzone */
+
+#dropzone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: cadetblue;
   text-align: center;
-  padding-top: 15px;
-  user-select: none;
+  height: 100px;
 }
 
-#notify > :nth-child(2) {
-  display: block;
-  width: 98%;
-  text-align: right;
-  user-select: none;
+#dropzone div {
+  background-color: bisque;
+  border: 2px dashed black;
+  width: 150px;
+  padding: 20px;
 }
 
-#notify-close {
-  font-weight: bold;
-  cursor: pointer;
-}
+/* Ag-Grid */
 
 #grid-container {
   display: flex;
