@@ -1,14 +1,23 @@
 #notify {
-	background-color: lightcoral;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+	/* background-color: cadetblue; */
+  text-align: center;
+  padding: 20px 10px 10px 10px;
+}
+
+#notify > div {
+  background-color: lightcoral;
   box-shadow: 0px 2px 3px darkred;
 	height: 80px;
 	text-align: center;
 	padding-top: 15px;
 	user-select: none;
-	margin: 25px 400px;
+  width: 525px;
 }
 
-#notify > :nth-child(2) {
+#notify > div > :nth-child(2) {
 	display: block;
 	padding-right: 15px;
 	text-align: right;

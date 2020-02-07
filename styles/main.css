@@ -2,7 +2,8 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #e0e0e0;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial, Helvetica, sans-serif;
+  min-width: 600px;
 }
 
 /* Header */
@@ -25,7 +26,7 @@ header div {
 	height: 70px;
 	background-color: cadetblue;
 	margin-right: 5px;
-	min-width: 90px;
+	width: 90px;
 	opacity: 0.2;
 	margin: 10px;
 }
@@ -44,41 +45,6 @@ header div {
 	margin: 10px 10px 10px 0px;
 	user-select: none;
 	white-space: nowrap;
-}
-
-/* Dropzone */
-
-#dropzone {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	/* background-color: cadetblue; */
-	text-align: center;
-	height: 100px;
-	margin: 50px;
-}
-
-#dropzone div {
-	background-color: #d3d3d3;
-	outline: 2px dashed rgba(0, 0, 0, 0.5);
-	outline-offset: -10px;
-	width: 215px;
-	padding: 20px 100px 50px 100px;
-	user-select: none;
-	transition: outline-offset .15s ease-in-out, background-color .15s linear;
-}
-
-#dropzone div label strong {
-	cursor: pointer;
-}
-
-#dropzone #fileupload {
-	position: absolute;
-	width: 0.1px;
-	height: 0.1px;
-	overflow: hidden;
-	opacity: 0;
-	z-index: -1;
 }
 
 /* Ag-Grid */
