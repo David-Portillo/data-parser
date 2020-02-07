@@ -1,21 +1,25 @@
 #notify {
-  background-color: lightcoral;
-  border: 1px solid darkred;
-  height: 80px;
-  text-align: center;
-  padding-top: 15px;
-  user-select: none;
-  margin: 25px 400px;
+	background-color: lightcoral;
+	border: 1px solid darkred;
+	height: 80px;
+	text-align: center;
+	padding-top: 15px;
+	user-select: none;
+	margin: 25px 400px;
 }
 
 #notify > :nth-child(2) {
-  display: block;
-  padding-right: 15px;
-  text-align: right;
-  user-select: none;
+	display: block;
+	padding-right: 15px;
+	text-align: right;
+	user-select: none;
+}
+
+#notify > p {
+	margin-top: 18px;
 }
 
 #notify-close {
-  font-weight: bold;
-  cursor: pointer;
+	font-weight: bold;
+	cursor: pointer;
 }
