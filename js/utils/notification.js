@@ -1,6 +1,6 @@
 export const showNotify = (message = 'No message is set') => {
-  let notify = document.querySelector('#notify');
-  let notifyMsg = document.querySelector('#notify > p')
+  let notify = document.querySelector('#notify > div');
+  let notifyMsg = document.querySelector('#notify > div > p')
 
   notify.removeAttribute('hidden');
   notifyMsg.textContent = message
@@ -10,7 +10,7 @@ export const showNotify = (message = 'No message is set') => {
 }
 
 window.closeNotify = () => {
-	let notify = document.querySelector('#notify');
+	let notify = document.querySelector('#notify > div');
 	notify.setAttribute('hidden', '');
 	console.log(notify);
 };
