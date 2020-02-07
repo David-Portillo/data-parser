@@ -3,11 +3,6 @@
 ### Table of Contents
 
 * [Purpose](https://github.com/HammerHand92/data-parser#purpose)
-* [File Structure](https://github.com/HammerHand92/data-parser#file-structure)
-  - docs
-  - js
-  - plugins
-  - styles
 * [Plugins](https://github.com/HammerHand92/data-parser#plugins)
   - Moment
   - Ag-Grid
@@ -23,9 +18,6 @@
 
 -----------
 ## Purpose
-
------------
-## File Structure
 
 -----------
 
