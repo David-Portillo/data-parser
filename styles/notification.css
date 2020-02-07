@@ -1,6 +1,6 @@
 #notify {
 	background-color: lightcoral;
-	border: 1px solid darkred;
+  box-shadow: 0px 2px 3px darkred;
 	height: 80px;
 	text-align: center;
 	padding-top: 15px;
