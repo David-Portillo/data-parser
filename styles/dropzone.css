@@ -29,7 +29,7 @@
 
 #dropzone div:hover {
 	outline-offset: -20px;
-	outline-color: #c8dadf;
+	outline-color:  rgb(175, 175, 175);
 	background-color: #fff;
 }
 
