@@ -1,6 +1,7 @@
 import { columns } from './utils/gridSpec.js';
 import { gridTooltip } from './utils/gridTooltip.js';
 import { showNotify } from './utils/notification.js'
+import { inspectFileExtension } from './utils/fileInspector.js'
 
 // global status tracking object
 let trackerIssue = {
@@ -49,17 +50,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.onDragOver = (event) => {
 	sampleData[0].make = 'new value';
-	console.log(gridOptions.api);
-	console.log("opening notification for testing")
+	// console.log(gridOptions.api);
+	// console.log("opening notification for testing")
 	showNotify("attempting to upload a file");
 	var params = {
 		force : true
 	};
 	gridOptions.api.refreshCells(params);
-	console.log(sampleData);
+	// console.log(sampleData);
+	inspectFileExtension()
 	event.preventDefault();
 };
 window.onDrop = (event) => {
 	console.log(event);
+	
 };
 
