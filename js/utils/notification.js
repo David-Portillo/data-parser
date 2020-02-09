@@ -7,6 +7,6 @@ export const showNotify = (message = 'No message is set') => {
 }
 
 window.closeNotify = () => {
-	let notify = document.querySelector('#notify > div');
+  let notify = document.querySelector('#notify > div');
   notify.setAttribute('hidden', '');
 };

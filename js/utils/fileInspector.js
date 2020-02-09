@@ -1,4 +1,4 @@
-import { trackerIssue } from './overseer.js'
+import { overseer } from './overseer.js'
 import { showNotify } from './notification.js'
 import { sampleData, gridOptions } from '../main.js'
 
@@ -9,17 +9,18 @@ const transmogrifyDropzone = ({ event = null}) => {
 }
 
 export const inspectFileExtension = () => {
-    trackerIssue.errorCount += 1;
+	overseer.properties();
+	overseer.errorCount += 1;
 }
 
 window.onDragOver = (event) => {
-	transmogrifyDropzone({ event: 'ongoing'})
+	let params = { force : true };
+	
 	showNotify("attempting to upload a file");
+	transmogrifyDropzone({ event: 'ongoing'})
 
-	console.log(dropzone)
 	sampleData[0].make = 'new value';
 	
-	let params = { force : true };
 	gridOptions.api.refreshCells(params);
 	inspectFileExtension()
 	event.preventDefault();
