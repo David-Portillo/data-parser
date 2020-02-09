@@ -1,5 +1,5 @@
-import { columns } from './utils/gridSpec.js';
-import { gridTooltip } from './utils/gridTooltip.js';
+import { columns } from './specs/gridSpec.js';
+import { gridTooltip } from './specs/gridTooltipSpec.js';
 
 // to be removed, used only for testing
 export let sampleData = [

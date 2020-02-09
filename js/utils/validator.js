@@ -1,4 +1,4 @@
-import { fieldMessage } from './messages.js';
+import { fieldMessage } from '../specs/messageSpec.js';
 
 const parseRule = ({ rule, isObject = false }) => {
 	if (!isObject) {

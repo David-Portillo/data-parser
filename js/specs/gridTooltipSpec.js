@@ -1,4 +1,4 @@
-import { validator } from './validator.js';
+import { validator } from '../utils/validator.js';
 import { fieldSpecification as fieldSpec } from './fieldSpec.js';
 
 export const gridTooltip = function() {};
