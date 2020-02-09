@@ -1,3 +1,5 @@
+import { trackerIssue } from './overseer.js'
+
 export const showNotify = (message = 'No message is set') => {
   let notify = document.querySelector('#notify > div');
   let notifyMsg = document.querySelector('#notify > div > p')
@@ -8,5 +10,6 @@ export const showNotify = (message = 'No message is set') => {
 
 window.closeNotify = () => {
 	let notify = document.querySelector('#notify > div');
-	notify.setAttribute('hidden', '');
+  notify.setAttribute('hidden', '');
+  console.log("notification overseer: ", trackerIssue)
 };
