@@ -10,10 +10,12 @@
 * Docs
   - [main]()
   - [fieldSpec]()
-  - [notification]()
-  - [messages]()
   - [gridSpec]()
-  - [gridTooltip]()
+  - [gridTooltipSpec]()
+  - [messageSpec]()
+  - [fileInspector]()
+  - [notification]()
+  - [overseer]()
   - [validator]()
 
 -----------
