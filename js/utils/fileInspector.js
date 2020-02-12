@@ -36,7 +36,9 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	let reader = new FileReader();
 	
 	reader.readAsArrayBuffer(file);
+
 	overseer.fileCompliant = true;
+	overseer.properties();
 
 	reader.onload = (e) => {
 		console.log('[reader]: reading file onload event...')
@@ -55,6 +57,7 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	reader.onloadend = (e) => {
 		console.log('[reader]: reading done...')
 		if(e.target.error) {
+			overseer.fileCompliant = false;
 			showNotify('[reader]: An error occurred when reading file')
 			console.log(e.target.error)
 		}
