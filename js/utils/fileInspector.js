@@ -49,5 +49,10 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 			console.log(first_sheet_name);
 			console.log(worksheet)
 			console.log(jsonWS)
-	}	
+	}
+
+	reader.onloadend = (e) => {
+		console.log('reading done...')
+	}
+	
 }
