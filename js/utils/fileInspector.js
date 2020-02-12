@@ -49,27 +49,5 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 			console.log(first_sheet_name);
 			console.log(worksheet)
 			console.log(jsonWS)
-	}
-
-
-	reader.onloadstart = (e) => {
-		console.log('reading has started...')
-	}
-
-	reader.onprogress = (e) => {
-		console.log("reading in progress... ")
-	}
-	
-	reader.onabort = (e) => {
-		console.log('reading has been aborted using abort()')
-	}
-
-	reader.onloadend = (e) => {
-		console.log('reading done...')
-	}
-
-	reader.onerror = (e) => {
-		console.log('an error occurred')
-	}
-	
+	}	
 }
