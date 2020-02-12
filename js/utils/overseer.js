@@ -2,6 +2,7 @@ function Overseer() {
 	let _errorCount = 0;
 	let _fileCompliant = false;
 	let _parsingCompleted = false;
+	let _data = []
 
 	Object.defineProperty(this, 'errorCount', {
 		enumerable: true,
@@ -42,8 +43,24 @@ function Overseer() {
 		},
 	});
 
+	Object.defineProperty(this, 'data', {
+		enumerable: false,
+		configurable: false,
+		get: function() {
+			console.log(`Retrieving data value, yield ${_data}`);
+			return _data;
+		},
+		set: function(newValue) {
+			console.log(`Updating data value to ${newValue}`);
+			_data = newValue;
+		}
+	})
+
 	Object.defineProperty(this, 'properties', {
-		value: function() { console.table({_errorCount, _fileCompliant, _parsingCompleted}) },
+		value: function() { 
+			console.table({_errorCount, _fileCompliant, _parsingCompleted })
+			console.table(_data)
+		},
 		writable: false,
 		enumerable: false,
 		configurable: false
