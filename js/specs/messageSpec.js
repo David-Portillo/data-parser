@@ -15,3 +15,7 @@ export const fieldMessage = (adjutant, value, rule, field) => {
 	else if (adjutant === 'dateField->unknown') 	return `${fieldSpec[field].tag} field contains an invalid date.<br/>Format: ${rule}`
 	return;
 };
+
+export const notificationMessage = () => {
+
+}
