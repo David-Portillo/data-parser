@@ -2,34 +2,74 @@ import { overseer } from './overseer.js'
 import { showNotify } from './notification.js'
 import { sampleData, gridOptions } from '../main.js'
 
-const transmogrifyDropzone = ({ event = null}) => {
+const transmogrifyDropzone = ({ event = null }) => {
 	let dropzone = document.querySelector('#dropzone > div')
 	dropzone.removeAttribute('class')
 	dropzone.setAttribute('class', `dropzone-${event}`)
 }
 
-export const inspectFileExtension = () => {
-	overseer.properties();
-	overseer.errorCount += 1;
-}
-
 window.onDragOver = (event) => {
-	let params = { force : true };
-	
-	showNotify("attempting to upload a file");
-	transmogrifyDropzone({ event: 'ongoing'})
-
-	sampleData[0].make = 'new value';
-	
-	gridOptions.api.refreshCells(params);
-	inspectFileExtension()
 	event.preventDefault();
+	transmogrifyDropzone({ event: 'ongoing'})
 };
 
 window.onDragLeave = (event) => {
+	event.preventDefault();
 	transmogrifyDropzone({ event: 'standby'})
 }
 
-window.onDrop = (event) => {
-	console.log(event);
-};
+window.inspectFile = ({input, uploadType = 'dropzone'}) => {
+	event.preventDefault();
+
+	const acceptableExtensions = ['xlsx', 'csv'];
+
+	let file = uploadType === 'browse' ? input.files[0] : input.dataTransfer.items[0].getAsFile();
+	let fileExtension = file.name.split('.').pop();
+
+	if(!acceptableExtensions.includes(fileExtension)) {
+		showNotify(`Invalid file! Please provide ${ acceptableExtensions } files`)
+		transmogrifyDropzone({ event: 'standby'})
+		return 0;
+	}
+
+	let reader = new FileReader();
+		
+	reader.readAsArrayBuffer(file);
+
+	reader.onload = (e) => {
+		console.log('reading onload')
+		let rawData = new Uint8Array(e.target.result);
+		console.log(rawData)
+		let workbook = XLSX.read(rawData, { type: 'array' });
+			let first_sheet_name = workbook.SheetNames[0];
+			let worksheet = workbook.Sheets[first_sheet_name];
+			let jsonWS = XLSX.utils.sheet_to_json(worksheet);
+
+			console.log(e.target.result);
+			console.log(first_sheet_name);
+			console.log(worksheet)
+			console.log(jsonWS)
+	}
+
+
+	reader.onloadstart = (e) => {
+		console.log('reading has started...')
+	}
+
+	reader.onprogress = (e) => {
+		console.log("reading in progress... ")
+	}
+	
+	reader.onabort = (e) => {
+		console.log('reading has been aborted using abort()')
+	}
+
+	reader.onloadend = (e) => {
+		console.log('reading done...')
+	}
+
+	reader.onerror = (e) => {
+		console.log('an error occurred')
+	}
+	
+}
