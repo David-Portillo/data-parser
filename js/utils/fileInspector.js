@@ -27,14 +27,17 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	let fileExtension = file.name.split('.').pop();
 
 	if(!acceptableExtensions.includes(fileExtension)) {
+		overseer.fileCompliant = false;
 		showNotify(`Invalid file! Please provide ${ acceptableExtensions } files`)
 		transmogrifyDropzone({ event: 'standby'})
 		return 0;
 	}
 
 	let reader = new FileReader();
-		
+	
+	
 	reader.readAsArrayBuffer(file);
+	overseer.fileCompliant = true;
 
 	reader.onload = (e) => {
 		console.log('reading onload')
@@ -53,6 +56,10 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 
 	reader.onloadend = (e) => {
 		console.log('reading done...')
+		if(e.target.error) {
+			showNotify('An error occurred when reading file')
+			console.log(e.target.error)
+		}
 	}
 	
 }
