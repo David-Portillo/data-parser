@@ -35,14 +35,12 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 
 	let reader = new FileReader();
 	
-	
 	reader.readAsArrayBuffer(file);
 	overseer.fileCompliant = true;
 
 	reader.onload = (e) => {
-		console.log('reading onload')
+		console.log('[reader]: reading file onload event...')
 		let rawData = new Uint8Array(e.target.result);
-		console.log(rawData)
 		let workbook = XLSX.read(rawData, { type: 'array' });
 			let first_sheet_name = workbook.SheetNames[0];
 			let worksheet = workbook.Sheets[first_sheet_name];
@@ -55,9 +53,9 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	}
 
 	reader.onloadend = (e) => {
-		console.log('reading done...')
+		console.log('[reader]: reading done...')
 		if(e.target.error) {
-			showNotify('An error occurred when reading file')
+			showNotify('[reader]: An error occurred when reading file')
 			console.log(e.target.error)
 		}
 	}
