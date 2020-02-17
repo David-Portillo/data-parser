@@ -15,6 +15,7 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 			throw new Error(notifyMessage.invalidFileExt)
 
 		let reader = new FileReader();
+		let fileDetails = {}
 
 		reader.readAsArrayBuffer(file);
 		reader.onload = (e) => {
@@ -23,16 +24,18 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 				cellDates: true,
 			}
 
-			let rawData = new Uint8Array(e.target.result);
-			let workbook = XLSX.read(rawData, opts);
-			let first_sheet_name = workbook.SheetNames[0];
-			let worksheet = workbook.Sheets[first_sheet_name];
+			const rawData = new Uint8Array(e.target.result);
+			const workbook = XLSX.read(rawData, opts);
+			const sheetName = workbook.SheetNames[0];
+			const worksheet = workbook.Sheets[sheetName];
 			let jsonWS = XLSX.utils.sheet_to_json(worksheet, { blankRows: false });
 
 			console.log(workbook)
-			console.log(first_sheet_name);
+			console.log(sheetName);
 			console.log(worksheet);
 			console.log(jsonWS);
+
+			fileDetails.name = `${file.name} - ${sheetName}`
 
 		};
 
@@ -43,7 +46,7 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 			console.log('continue with logic...')
 			overseer.fileCompliant = true;
 			overseer.properties();
-			inspection.success({filename: file.name})
+			inspection.success({filename: fileDetails.name})
 			showNotify({message: notifyMessage.inspectionPassed, event: 'success'})
 
 		};
