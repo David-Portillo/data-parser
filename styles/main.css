@@ -47,14 +47,44 @@ header div {
 	white-space: nowrap;
 }
 
+
+/* Reset */
+
+#reset {
+	display: none;
+	padding: 2px;
+	margin: 1vw 1vw 0vw 1vw;
+}
+
+#reset :nth-child(1) {
+	display: inline-block;
+	padding: 0px 10px 3px 10px;
+	border: 1px solid black;
+	cursor: pointer;
+	transition: outline-offset .15s ease-in-out, background-color .15s linear;
+	box-shadow: 0px 1px 3px #2d3436;
+}
+
+#reset > :nth-child(1):hover {
+	background-color: cadetblue;
+
+}
+
 /* Ag-Grid */
+
+#reset :nth-child(2) {
+	display: inline-block;
+	margin-left: 5px;
+	padding: 0px 10px 3px 5px;
+	border-left: 2px solid black;
+}
 
 #grid-container {
 	display: flex;
 	background-color: #2d3436;
 	border: 1px solid black;
 	justify-content: center;
-	margin: 1vw;
+	margin: 0.2vw 1vw 1vw 1vw;
 }
 
 #data-grid {
