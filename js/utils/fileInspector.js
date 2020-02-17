@@ -1,26 +1,16 @@
 import {overseer} from './overseer.js';
 import {showNotify} from './notification.js';
+import {transmogrifyDropzone, displayResetButton} from '../commonEvents.js'
 import {notifyMessage} from '../specs/messageSpec.js';
 import {sampleData, gridOptions} from '../main.js';
 
-const transmogrifyDropzone = ({event = null}) => {
-	let dropzone = document.querySelector('#dropzone > div');
-	dropzone.removeAttribute('class');
-	dropzone.setAttribute('class', `dropzone-${event}`);
-};
-
-window.onDragOver = (event) => {
-	event.preventDefault();
-	transmogrifyDropzone({event: 'ongoing'});
-};
-
-window.onDragLeave = (event) => {
-	event.preventDefault();
-	transmogrifyDropzone({event: 'standby'});
-};
+const setAppData = ({ filename, data }) => {
+	displayResetButton({ filename })
+}
 
 window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	event.preventDefault();
+	transmogrifyDropzone({event: 'standby'});
 
 	const acceptableExtensions = [ 'xlsx', 'csv' ];
 
@@ -30,7 +20,6 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	if (!acceptableExtensions.includes(fileExtension)) {
 		overseer.fileCompliant = false;
 		showNotify(notifyMessage.invalidFileExt(acceptableExtensions));
-		transmogrifyDropzone({event: 'standby'});
 		return 0;
 	}
 
@@ -41,8 +30,6 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 		const opts = {
 			type: 'array',
 			cellDates: true,
-			// bookSheets: true,
-			// bookProps: true
 		}
 		let rawData = new Uint8Array(e.target.result);
 		let workbook = XLSX.read(rawData, opts);
@@ -51,10 +38,11 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 		let jsonWS = XLSX.utils.sheet_to_json(worksheet, { blankRows: false });
 
 		console.log(workbook)
-
 		console.log(first_sheet_name);
 		console.log(worksheet);
 		console.log(jsonWS);
+
+		setAppData({filename: file.name})
 	
 	};
 
@@ -62,7 +50,6 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 		if (e.target.error) {
 			overseer.fileCompliant = false;
 			showNotify(notifyMessage.fileError);
-			transmogrifyDropzone({event: 'standby'});
 			console.log(e.target.error);
 			return 0;
 		}
