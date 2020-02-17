@@ -1,24 +1,17 @@
 import {overseer} from './overseer.js';
-import {showNotify, transmogrifyDropzone, displayResetButton, resetAppStatus} from './common.js'
+import {showNotify, inspection, constants} from './common.js'
 import {notifyMessage} from '../specs/messageSpec.js';
 import {sampleData, gridOptions} from '../main.js';
 
-const setAppData = ({ filename, data }) => {
-	displayResetButton({ filename })
-}
-
 window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	event.preventDefault();
-	transmogrifyDropzone({event: 'standby'});
-
-	const acceptableExtensions = [ 'xlsx', 'csv' ];
 
 	let file = uploadType === 'browse' ? input.files[0] : input.dataTransfer.items[0].getAsFile();
 	let fileExtension = file.name.split('.').pop();
 
 	try {
 
-		if (!acceptableExtensions.includes(fileExtension)) 
+		if (!constants.acceptableExtensions.includes(fileExtension)) 
 			throw new Error(notifyMessage.invalidFileExt)
 
 		let reader = new FileReader();
@@ -41,16 +34,18 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 			console.log(worksheet);
 			console.log(jsonWS);
 
-			setAppData({filename: file.name})
-		
 		};
 
 		reader.onloadend = (e) => {
 			if (e.target.error) 
 				throw new Error(notifyMessage.fileError)
-
+				
+			console.log('continue with logic...')
 			overseer.fileCompliant = true;
 			overseer.properties();
+			inspection.success({filename: file.name})
+			showNotify({message: notifyMessage.inspectionPassed, event: 'success'})
+
 		};
 
 		reader.onerror = (e) => {
@@ -65,8 +60,9 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 		console.log(error.toString())
 
 		overseer.fileCompliant = false;
+    overseer.properties();
 		showNotify({message: error.message, event: 'error'});
-		resetAppStatus()
+		inspection.error()
 		return 0;
 	}
 };
