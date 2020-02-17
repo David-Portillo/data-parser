@@ -1,6 +1,5 @@
 import {overseer} from './overseer.js';
-import {showNotify} from './notification.js';
-import {transmogrifyDropzone, displayResetButton} from '../commonEvents.js'
+import {showNotify, transmogrifyDropzone, displayResetButton, handleFileInspectorError} from './common.js'
 import {notifyMessage} from '../specs/messageSpec.js';
 import {sampleData, gridOptions} from '../main.js';
 
@@ -19,7 +18,8 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 
 	if (!acceptableExtensions.includes(fileExtension)) {
 		overseer.fileCompliant = false;
-		showNotify(notifyMessage.invalidFileExt(acceptableExtensions));
+		showNotify({message: notifyMessage.invalidFileExt, event: 'error'});
+		handleFileInspectorError()
 		return 0;
 	}
 
@@ -49,7 +49,8 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	reader.onloadend = (e) => {
 		if (e.target.error) {
 			overseer.fileCompliant = false;
-			showNotify(notifyMessage.fileError);
+			showNotify({message: notifyMessage.fileError, event: 'error'});
+			handleFileInspectorError();
 			console.log(e.target.error);
 			return 0;
 		}
