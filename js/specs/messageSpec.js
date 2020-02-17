@@ -16,6 +16,8 @@ export const fieldMessage = (adjutant, value, rule, field) => {
 	return;
 };
 
-export const notificationMessage = () => {
-
+export const notifyMessage = {
+	invalidFileExt: (acceptableExtensions) => { return `Invalid file! Please provide ${ acceptableExtensions } files`},
+	fileError: '[reader]: An error occurred when reading file'
 }
+
