@@ -53,11 +53,12 @@ header div {
 #reset {
 	display: none;
 	padding: 2px;
-	margin: 1vw 1vw 0vw 1vw;
+	margin: 10vw 1vw 0vw 1vw;
 }
 
 #reset :nth-child(1) {
 	display: inline-block;
+	background-color: #d3d3d3;
 	padding: 0px 10px 3px 10px;
 	border: 1px solid black;
 	cursor: pointer;
