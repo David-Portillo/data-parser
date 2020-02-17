@@ -38,13 +38,20 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 
 	reader.readAsArrayBuffer(file);
 	reader.onload = (e) => {
+		const opts = {
+			type: 'array',
+			cellDates: true,
+			// bookSheets: true,
+			// bookProps: true
+		}
 		let rawData = new Uint8Array(e.target.result);
-		let workbook = XLSX.read(rawData, {type: 'array'});
+		let workbook = XLSX.read(rawData, opts);
 		let first_sheet_name = workbook.SheetNames[0];
 		let worksheet = workbook.Sheets[first_sheet_name];
-		let jsonWS = XLSX.utils.sheet_to_json(worksheet);
+		let jsonWS = XLSX.utils.sheet_to_json(worksheet, { blankRows: false });
 
-		console.log(e.target.result);
+		console.log(workbook)
+
 		console.log(first_sheet_name);
 		console.log(worksheet);
 		console.log(jsonWS);
@@ -63,4 +70,9 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 		overseer.fileCompliant = true;
 		overseer.properties();
 	};
+
+	reader.onerror = (e) => {
+		console.log("an error occurred")
+		console.log(e)
+	}
 };
