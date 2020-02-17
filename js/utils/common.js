@@ -22,7 +22,7 @@ export const displayResetButton = ({filename}) => {
 	document.getElementById('reset').style.display = 'block';
 }
 
-export const handleFileInspectorError = () => {
+export const resetAppStatus = () => {
   overseer.reset();
   overseer.properties();
   document.getElementById('fileupload').value = null;
@@ -37,7 +37,7 @@ window.closeNotify = () => {
 
 window.onResetFile = (event) => {
   event.preventDefault();
-  handleFileInspectorError();
+  resetAppStatus();
 }
 
 window.onDragOver = (event) => {
