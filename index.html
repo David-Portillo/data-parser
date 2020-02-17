@@ -23,6 +23,7 @@
 
     <script type="module" src="./js/utils/fileInspector.js"></script>
     <script type="module" src="./js/utils/notification.js"></script>
+    <script type="module" src="./js/commonEvents.js"></script>
     <script type="module" src="./js/main.js"></script>
 
     <title>Data Parser</title>
@@ -98,11 +99,23 @@
         </div>
       </section>
 
-      <!-- Grid Container -->
       
-      <div id="grid-container">
-        <div id="data-grid" class="ag-theme-balham-dark"></div>
-      </div>
+      <section>
+
+        <!-- Reset File Upload -->
+
+        <div id="reset">
+          <span onClick="onResetFile();">reset</span>
+          <span id="filename">...</span>
+        </div>
+
+        <!-- Grid Container -->
+
+        <div id="grid-container">
+          <div id="data-grid" class="ag-theme-balham-dark"></div>
+        </div>
+      </section>
+
     </main>
 
     <!-- Footer -->
@@ -112,3 +125,5 @@
     </footer>
   </body>
 </html>
+
+
