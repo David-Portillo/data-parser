@@ -63,7 +63,10 @@ function Overseer() {
 		 	_fileCompliant = false;
 		 	_parsingCompleted = false;
 		 	_data = []
-		}
+		},
+		writable: false,
+		enumerable: false,
+		configurable: false
 	})
 
 	Object.defineProperty(this, 'properties', {
