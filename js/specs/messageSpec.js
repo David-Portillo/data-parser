@@ -17,7 +17,13 @@ export const fieldMessage = (adjutant, value, rule, field) => {
 };
 
 export const notifyMessage = {
+	
+	// errors
 	invalidFileExt: `Invalid file! Please provide ${ constants.acceptableExtensions } files`,
-	fileError: '[reader]: An error occurred when reading file'
+	fileError: '[reader]: An error occurred when reading file',
+
+	// successes
+	inspectionPassed: 'File uploaded & parsed successfully'
+
 }
 
