@@ -37,10 +37,6 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	let reader = new FileReader();
 
 	reader.readAsArrayBuffer(file);
-
-	overseer.fileCompliant = true;
-	overseer.properties();
-
 	reader.onload = (e) => {
 		let rawData = new Uint8Array(e.target.result);
 		let workbook = XLSX.read(rawData, {type: 'array'});
@@ -52,13 +48,19 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 		console.log(first_sheet_name);
 		console.log(worksheet);
 		console.log(jsonWS);
+	
 	};
 
 	reader.onloadend = (e) => {
 		if (e.target.error) {
 			overseer.fileCompliant = false;
 			showNotify(notifyMessage.fileError);
+			transmogrifyDropzone({event: 'standby'});
 			console.log(e.target.error);
+			return 0;
 		}
+
+		overseer.fileCompliant = true;
+		overseer.properties();
 	};
 };
