@@ -19,20 +19,13 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 
 		reader.readAsArrayBuffer(file);
 		reader.onload = (e) => {
-			const opts = {
-				type: 'array',
-				cellDates: true,
-			}
-
+			const opts = { type: 'array', cellDates: true }
 			const rawData = new Uint8Array(e.target.result);
 			const workbook = XLSX.read(rawData, opts);
 			const sheetName = workbook.SheetNames[0];
 			const worksheet = workbook.Sheets[sheetName];
 			let jsonWS = XLSX.utils.sheet_to_json(worksheet, { blankRows: false });
 
-			console.log(workbook)
-			console.log(sheetName);
-			console.log(worksheet);
 			console.log(jsonWS);
 
 			fileDetails.name = `${file.name} - ${sheetName}`
