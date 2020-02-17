@@ -56,6 +56,16 @@ function Overseer() {
 		}
 	})
 
+	Object.defineProperty(this, 'reset', {
+		value: function(){
+			console.log('resetting overseer...');
+			_errorCount = 0;
+		 	_fileCompliant = false;
+		 	_parsingCompleted = false;
+		 	_data = []
+		}
+	})
+
 	Object.defineProperty(this, 'properties', {
 		value: function() { 
 			console.table({_errorCount, _fileCompliant, _parsingCompleted })
