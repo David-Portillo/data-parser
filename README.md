@@ -13,8 +13,8 @@
   - [gridSpec]()
   - [gridTooltipSpec]()
   - [messageSpec]()
+  - [common]()
   - [fileInspector]()
-  - [notification]()
   - [overseer]()
   - [validator]()
 
@@ -27,7 +27,7 @@
 
  **[Moment.js]()**
 
- * Validate & convert date fields
+ * Validates & converts date fields tothe desired format
 
  **[Ag-Grid]()**
 
