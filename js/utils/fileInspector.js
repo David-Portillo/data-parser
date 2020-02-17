@@ -54,11 +54,6 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 		}
 
 	} catch (error) {
-		console.log(error.name)
-		console.log(error.message)
-		console.log(error.stack)
-		console.log(error.toString())
-
 		overseer.fileCompliant = false;
     overseer.properties();
 		showNotify({message: error.message, event: 'error'});
