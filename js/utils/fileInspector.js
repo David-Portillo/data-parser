@@ -1,7 +1,8 @@
-import {overseer} from './overseer.js';
-import {showNotify, inspection, constants} from './common.js'
-import {notifyMessage} from '../specs/messageSpec.js';
-import {sampleData, gridOptions} from '../main.js';
+import { overseer } from './overseer.js';
+import { showNotify, inspectionOutcome, constants } from './common.js'
+import { notifyMessage as nm } from '../specs/messageSpec.js';
+import InspectionException from '../exceptions/inspectionException.js'
+import { sampleData, gridOptions } from '../main.js';
 
 window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	event.preventDefault();
@@ -12,7 +13,7 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 	try {
 
 		if (!constants.acceptableExtensions.includes(fileExtension)) 
-			throw new Error(notifyMessage.invalidFileExt)
+			throw new InspectionException({ et: 'ie_ife', nt: { msg: nm.invalidFileExt, ev: 'error' }})
 
 		let reader = new FileReader();
 		let fileDetails = {}
@@ -34,13 +35,13 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 
 		reader.onloadend = (e) => {
 			if (e.target.error) 
-				throw new Error(notifyMessage.fileError)
+				throw new InspectionException({ et: 'ie_fre', nt: { msg: nm.fileError, ev: 'error' } })
 				
 			console.log('continue with logic...')
 			overseer.fileCompliant = true;
 			overseer.properties();
-			inspection.success({filename: fileDetails.name})
-			showNotify({message: notifyMessage.inspectionPassed, event: 'success'})
+			inspectionOutcome.success({filename: fileDetails.name})
+			showNotify({message: nm.inspectionPassed, event: 'success'})
 
 		};
 
@@ -51,9 +52,10 @@ window.inspectFile = ({input, uploadType = 'dropzone'}) => {
 
 	} catch (error) {
 		overseer.fileCompliant = false;
-    overseer.properties();
-		showNotify({message: error.message, event: 'error'});
-		inspection.error()
+		overseer.properties();
+		console.log(error.toString())
+		showNotify({message: error.notify.msg, event: error.notify.ev});
+		inspectionOutcome.error()
 		return 0;
 	}
 };
