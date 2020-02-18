@@ -44,7 +44,7 @@ window.onDragLeave = (event) => {
 
 // Resetting section
 
-export const inspection = {
+export const inspectionOutcome = {
   reset: () => {
     overseer.reset();
     overseer.properties();
