@@ -22,10 +22,10 @@ const parseRule = ({ rule, isObject = false }) => {
 };
 
 const parseValue = (value) => {
-	const isBlank = /^\s*$/
+	const isBlank = /^\s*$/;
 	if (value === undefined || value === null) return '';
 	else if (isBlank.test(value)) return value.trim();
-	else return value ;
+	else return value;
 };
 
 const adjutant = {
@@ -76,20 +76,25 @@ const adjutant = {
 	dateField   : (r, v, field) => {
 		const value = parseValue(v);
 		const { format = moment.HTML5_FMT.DATE } = parseRule({ rule: r || '{}', isObject: true });
-		const separator = format.split("").find(s => s === '.' || s === '/' || s === '-') || '-'
+		const separator = format.split('').find((s) => s === '.' || s === '/' || s === '-') || '-';
 
 		if (value.length > 0) {
-			const hasInvalidChar = value.split("").some(char => { return isNaN(char) && char !== separator });
+			const hasInvalidChar = value.split('').some((char) => {
+				return isNaN(char) && char !== separator;
+			});
 
 			if (hasInvalidChar)
 				return { passed: false, message: fieldMessage('dateField->format', value, format, field) };
 
 			if (!moment(value, format, true).isValid()) {
 				const invalidAt = moment(value, format, true).invalidAt();
-				
-				if (invalidAt === 0) return { passed: false, message: fieldMessage('dateField->year', value, format, field) };
-				if (invalidAt === 1) return { passed: false, message: fieldMessage('dateField->month', value, format, field) };
-				if (invalidAt === 2) return { passed: false, message: fieldMessage('dateField->day', value, format, field) };
+
+				if (invalidAt === 0)
+					return { passed: false, message: fieldMessage('dateField->year', value, format, field) };
+				if (invalidAt === 1)
+					return { passed: false, message: fieldMessage('dateField->month', value, format, field) };
+				if (invalidAt === 2)
+					return { passed: false, message: fieldMessage('dateField->day', value, format, field) };
 
 				return { passed: false, message: fieldMessage('dateField->unknown', value, format, field) };
 			}
