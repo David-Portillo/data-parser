@@ -1,2 +1,7 @@
-﻿First Name,Last Name,Date of Birth
-David,Portillo,"July 25th, 1992"
+Maker,Model,Price,Date,,column with no value,another
+Toyota,Celica,35000,2020-10-20,value with no column,,
+Ford,Mustang,32000,2020-20-20,,,
+Porsche,Boxter,72000,25/07/1992,,,
+BMW,X6,72000,30/02/2020,,,
+JEEP,Wrangler,72000,12/12/2020,,,
+GMC,Acadia,72000,20/20/2020,,,
