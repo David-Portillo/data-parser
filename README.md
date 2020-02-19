@@ -8,15 +8,16 @@
   - Ag-Grid
   - XLSX
 * Docs
-  - [main]()
+  - [grid]()
+  - [gridTooltip]()
+  - [inspectionException]()
   - [fieldSpec]()
-  - [gridSpec]()
-  - [gridTooltipSpec]()
   - [messageSpec]()
   - [common]()
   - [fileInspector]()
   - [overseer]()
   - [validator]()
+  - [index]()
 
 -----------
 ## Purpose
