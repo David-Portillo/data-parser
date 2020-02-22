@@ -1,9 +1,16 @@
 import { grid } from '../grid/grid.js';
 import InspectionException from '../handlers/inspectionException.js';
 import { notifyMessage as nm } from '../specs/messageSpec.js';
+import { fieldKeys } from '../specs/fieldSpec.js'
 import { constants, inspectionOutcome, showNotify } from './common.js';
 
-window.inspectFile = ({ input, uploadType = 'dropzone' }) => {
+const interpretFile = ({ data }) => {
+	console.log('System fields: ', fieldKeys);
+	console.log('Data: ', data);
+	console.log(Object.keys(data[0]))
+}
+
+window.depository = ({ input, uploadType = 'dropzone' }) => {
 	event.preventDefault();
 
 	let file = uploadType === 'browse' ? input.files[0] : input.dataTransfer.items[0].getAsFile();
@@ -33,22 +40,24 @@ window.inspectFile = ({ input, uploadType = 'dropzone' }) => {
 
 			// simulating when data has been sanitized
 
-			jsonWS = [
-				{
-					make  : jsonWS[0].Maker,
-					model : jsonWS[0].Model,
-					price : 10,
-					date  : jsonWS[0].Date
-				},
-				{
-					make  : jsonWS[0].Maker,
-					model : jsonWS[0].Model,
-					price : '',
-					date  : jsonWS[0].Date
-				}
-			];
+			// jsonWS = [
+			// 	{
+			// 		make  : jsonWS[0].Maker,
+			// 		model : jsonWS[0].Model,
+			// 		price : 10,
+			// 		date  : jsonWS[0].Date
+			// 	},
+			// 	{
+			// 		make  : jsonWS[0].Maker,
+			// 		model : jsonWS[0].Model,
+			// 		price : '',
+			// 		date  : jsonWS[0].Date
+			// 	}
+			// ];
 
-			grid.api.updateRowData({ add: jsonWS });
+			interpretFile({ data: jsonWS })
+
+			//grid.api.updateRowData({ add: jsonWS });
 		};
 
 		reader.onloadend = (e) => {
