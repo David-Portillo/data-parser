@@ -1,5 +1,6 @@
 import { fieldSpecification as fieldSpec } from './fieldSpec.js';
 import { constants } from '../utils/common.js'
+
 export const fieldMessage = (adjutant, value, rule, field) => {
 	if (adjutant === 'advisable->price')            return `${fieldSpec[field].tag} can be empty, but providing this<br/>information would help us determine the tax`;
 	else if (adjutant === 'required')               return `${fieldSpec[field].tag} field cannot be empty`;
