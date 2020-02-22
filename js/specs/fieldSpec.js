@@ -20,3 +20,5 @@ export const fieldSpecification = {
 		rules : [ 'required|false', 'dateField|{"format": "DD/MM/YYYY"}' ]
 	}
 };
+
+export const fieldKeys = Object.keys(fieldSpecification);
