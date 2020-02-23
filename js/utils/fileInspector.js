@@ -1,5 +1,5 @@
 import InspectionException from '../handlers/inspectionException.js';
-import { fieldKeys, aliases } from '../specs/fieldSpec.js';
+import { aliases } from '../specs/fieldSpec.js';
 import { notifyMessage as nm } from '../specs/messageSpec.js';
 import { constants, inspectionOutcome, showNotify } from './common.js';
 import { overseer } from './overseer.js';
@@ -7,8 +7,8 @@ import { overseer } from './overseer.js';
 const keyLocator = ({ efk = [], sfk = aliases() }) => {
 	console.log('system field and aliases: ', sfk);
 	console.log('external field headers: ', efk);
+	console.log('navigator languages: ', overseer.navDialect)
 
-	
 	return {};
 };
 
