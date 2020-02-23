@@ -1,14 +1,21 @@
-import { grid } from '../grid/grid.js';
 import InspectionException from '../handlers/inspectionException.js';
+import { fieldKeys, aliases } from '../specs/fieldSpec.js';
 import { notifyMessage as nm } from '../specs/messageSpec.js';
-import { fieldKeys } from '../specs/fieldSpec.js'
 import { constants, inspectionOutcome, showNotify } from './common.js';
+import { overseer } from './overseer.js';
+
+const keyLocator = ({ efk = [], sfk = aliases() }) => {
+	console.log('system field and aliases: ', sfk);
+	console.log('external field headers: ', efk);
+
+	
+	return {};
+};
 
 const interpretFile = ({ data }) => {
-	console.log('System fields: ', fieldKeys);
-	console.log('Data: ', data);
-	console.log(Object.keys(data[0]))
-}
+	const efk = Object.keys(data[0]);
+	const outcome = keyLocator({ efk });
+};
 
 window.depository = ({ input, uploadType = 'dropzone' }) => {
 	event.preventDefault();
@@ -32,30 +39,9 @@ window.depository = ({ input, uploadType = 'dropzone' }) => {
 			const worksheet = workbook.Sheets[sheetName];
 			let jsonWS = XLSX.utils.sheet_to_json(worksheet, { blankRows: false });
 
-			// console.log(workbook)
-			// console.log(worksheet)
-			// console.log(jsonWS);
-
 			fileDetails.name = `${file.name} - ${sheetName}`;
 
-			// simulating when data has been sanitized
-
-			// jsonWS = [
-			// 	{
-			// 		make  : jsonWS[0].Maker,
-			// 		model : jsonWS[0].Model,
-			// 		price : 10,
-			// 		date  : jsonWS[0].Date
-			// 	},
-			// 	{
-			// 		make  : jsonWS[0].Maker,
-			// 		model : jsonWS[0].Model,
-			// 		price : '',
-			// 		date  : jsonWS[0].Date
-			// 	}
-			// ];
-
-			interpretFile({ data: jsonWS })
+			interpretFile({ data: jsonWS });
 
 			//grid.api.updateRowData({ add: jsonWS });
 		};
