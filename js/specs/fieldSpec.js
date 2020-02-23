@@ -2,7 +2,7 @@ export const fieldSpecification = {
 	make  : {
 		id      : 'make',
 		tag     : 'Maker',
-		aliases : [ 'make', 'make', 'manufacturer', 'builder', 'contructor', 'originator' ],
+		aliases : [ 'make', 'maker', 'manufacturer', 'builder', 'contructor', 'originator' ],
 		rules   : [ 'maxLength|6' ]
 	},
 	model : {
