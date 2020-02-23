@@ -4,10 +4,21 @@ import { notifyMessage as nm } from '../specs/messageSpec.js';
 import { constants, inspectionOutcome, showNotify } from './common.js';
 import { overseer } from './overseer.js';
 
+const keyComparator = () => {};
+
+const keyRemover = ({ set = [ {} ], strip = [] }) => {
+	set.map((r) => {
+		Object.keys(r).map((k) => {
+			if (strip.includes(k)) return delete r[k];
+		});
+	});
+	return set;
+};
+
 const keyLocator = ({ efk = [], sfk = aliases() }) => {
 	console.log('system field and aliases: ', sfk);
 	console.log('external field headers: ', efk);
-	console.log('navigator languages: ', overseer.navDialect)
+	console.log('navigator languages: ', overseer.navDialect);
 
 	return {};
 };
@@ -15,6 +26,7 @@ const keyLocator = ({ efk = [], sfk = aliases() }) => {
 const interpretFile = ({ data }) => {
 	const efk = Object.keys(data[0]);
 	const outcome = keyLocator({ efk });
+	console.log(data);
 };
 
 window.depository = ({ input, uploadType = 'dropzone' }) => {
@@ -37,10 +49,11 @@ window.depository = ({ input, uploadType = 'dropzone' }) => {
 			const workbook = XLSX.read(rawData, opts);
 			const sheetName = workbook.SheetNames[0];
 			const worksheet = workbook.Sheets[sheetName];
-			let jsonWS = XLSX.utils.sheet_to_json(worksheet, { blankRows: false });
+			let jsonWS = XLSX.utils.sheet_to_json(worksheet);
 
 			fileDetails.name = `${file.name} - ${sheetName}`;
 
+			jsonWS = keyRemover({ set: jsonWS, strip: [ '__EMPTY' ] });
 			interpretFile({ data: jsonWS });
 
 			//grid.api.updateRowData({ add: jsonWS });
