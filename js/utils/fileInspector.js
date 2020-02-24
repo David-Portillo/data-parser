@@ -4,7 +4,7 @@ import { notifyMessage as nm } from '../specs/messageSpec.js';
 import { constants, inspectionOutcome, showNotify } from './common.js';
 import { overseer } from './overseer.js';
 
-const keyComparator = () => {};
+const stringComparator = () => {};
 
 const keyRemover = ({ set = [ {} ], strip = [] }) => {
 	set.map((r) => {
