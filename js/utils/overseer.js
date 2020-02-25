@@ -1,10 +1,10 @@
 import { grid } from '../grid/grid.js';
 
-function Overseer({ dialect = [] }) {
+function Overseer({ locale = [] }) {
 	let _errorCount = 0;
 	let _fileCompliant = false;
 	let _parsingCompleted = false;
-	let _navDialect = dialect;
+	let _locale = locale;
 
 	Object.defineProperty(this, 'errorCount', {
 		enumerable   : true,
@@ -49,8 +49,8 @@ function Overseer({ dialect = [] }) {
 		enumerable   : true,
 		configurable : false,
 		get          : function() {
-			console.log(`Retrieving navigator languages, fetched: ${_navDialect}`);
-			return _navDialect;
+			console.log(`Retrieving navigator languages, fetched: ${_locale}`);
+			return _locale;
 		}
 	});
 
@@ -78,5 +78,5 @@ function Overseer({ dialect = [] }) {
 	Object.preventExtensions(this);
 }
 
-let dialect = navigator.languages ? navigator.languages : navigator.language;
-export let overseer = new Overseer({ dialect });
+let locale = navigator.languages ? navigator.languages : navigator.language;
+export let overseer = new Overseer({ locale });
