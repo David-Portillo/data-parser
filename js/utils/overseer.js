@@ -1,5 +1,3 @@
-import { grid } from '../grid/grid.js';
-
 function Overseer({ locale = [] }) {
 	let _errorCount = 0;
 	let _fileCompliant = false;
@@ -55,28 +53,28 @@ function Overseer({ locale = [] }) {
 	});
 
 	Object.defineProperty(this, 'reset', {
+		writable     : false,
+		enumerable   : false,
+		configurable : false,
 		value        : function() {
 			console.log('resetting overseer...');
 			_errorCount = 0;
 			_fileCompliant = false;
 			_parsingCompleted = false;
-		},
-		writable     : false,
-		enumerable   : false,
-		configurable : false
+		}
 	});
 
 	Object.defineProperty(this, 'properties', {
-		value        : function() {
-			console.table({ _errorCount, _fileCompliant, _parsingCompleted });
-		},
 		writable     : false,
 		enumerable   : false,
-		configurable : false
+		configurable : false,
+		value        : function() {
+			console.table({ _errorCount, _fileCompliant, _parsingCompleted });
+		}
 	});
 
 	Object.preventExtensions(this);
 }
 
-let locale = navigator.languages ? navigator.languages : navigator.language;
+const locale = navigator.languages ? navigator.languages : navigator.language;
 export let overseer = new Overseer({ locale });
