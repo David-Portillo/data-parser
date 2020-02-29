@@ -1,34 +1,24 @@
 import { overseer } from './overseer.js';
 import { aliases } from '../specs/fieldSpec.js';
 
-function KeyAdjutant() {
-	let _dataSet = [];
+function KeyAdjutant(dataSet) {
+	let _dataSet = dataSet;
 
-	Object.defineProperty(this, 'initSet', {
-		enumerable   : false,
-		configurable : false,
-		writable     : false,
-		value        : function(dataSet = []) {
-			_dataSet = dataSet;
-			return this;
-		}
-	});
-
-	Object.defineProperty(this, 'keyNormalizer', {
+	Object.defineProperty(this, 'normalize', {
 		enumerable   : false,
 		configurable : false,
 		writable     : false,
 		value        : function(keyCase = 'lower') {
 			let normalizedDataSet = [];
 
-			_dataSet.forEach((o) => {
+			_dataSet.forEach((obj) => {
 				normalizedDataSet.push(
-					Object.keys(o).reduce((acc, k) => {
+					Object.keys(obj).reduce((acc, key) => {
 						return {
 							...acc,
 							[keyCase === 'upper'
-								? k.toLocaleUpperCase(overseer.locale)
-								: k.toLocaleLowerCase(overseer.locale)]: o[k]
+								? key.toLocaleUpperCase(overseer.locale)
+								: key.toLocaleLowerCase(overseer.locale)]: obj[key]
 						};
 					}, {})
 				);
@@ -38,21 +28,21 @@ function KeyAdjutant() {
 		}
 	});
 
-	Object.defineProperty(this, 'keyRemover', {
+	Object.defineProperty(this, 'remove', {
 		enumerable   : false,
 		configurable : false,
 		writable     : false,
 		value        : function(strip = []) {
-			_dataSet.map((r) => {
-				Object.keys(r).map((k) => {
-					if (strip.includes(k)) return delete r[k];
+			_dataSet.map((obj) => {
+				Object.keys(obj).map((key) => {
+					if (strip.includes(key)) return delete obj[key];
 				});
 			});
 			return this;
 		}
 	});
 
-	Object.defineProperty(this, 'keyLocator', {
+	Object.defineProperty(this, 'locate', {
 		enumerable   : false,
 		configurable : false,
 		writable     : false,
@@ -75,4 +65,4 @@ function KeyAdjutant() {
 	Object.preventExtensions(this);
 }
 
-export const keyAdjutant = new KeyAdjutant();
+export const keyAdjutant = (dataSet = []) => new KeyAdjutant(dataSet);
