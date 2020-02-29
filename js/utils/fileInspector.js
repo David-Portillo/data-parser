@@ -6,7 +6,7 @@ import { keyAdjutant } from './keyAdjutant.js';
 const stringComparator = () => {};
 
 const interpretFile = ({ data }) => {
-	data = keyAdjutant.initSet(data).keyNormalizer('lower').keyRemover([ '__empty', 'another' ]).val();
+	data = keyAdjutant(data).normalize('lower').remove([ '__empty', 'another' ]).val();
 	console.log(data);
 	return data;
 };
