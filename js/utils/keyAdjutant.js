@@ -42,7 +42,7 @@ function KeyAdjutant(dataSet) {
 		}
 	});
 
-	Object.defineProperty(this, 'locate', {
+	Object.defineProperty(this, 'inspect', {
 		enumerable   : false,
 		configurable : false,
 		writable     : false,
