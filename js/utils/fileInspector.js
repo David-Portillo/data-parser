@@ -3,10 +3,8 @@ import { notifyMessage as nm } from '../specs/messageSpec.js';
 import { constants, inspectionOutcome, showNotify } from './common.js';
 import { keyAdjutant } from './keyAdjutant.js';
 
-const stringComparator = () => {};
-
 const interpretFile = ({ data }) => {
-	data = keyAdjutant(data).normalize('lower').remove([ '__empty', 'another' ]).val();
+	//data = keyAdjutant(data).normalize('lower').remove([ '__empty', 'another' ]).val();
 	console.log(data);
 	return data;
 };
