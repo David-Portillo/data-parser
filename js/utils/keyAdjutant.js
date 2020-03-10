@@ -46,9 +46,10 @@ function KeyAdjutant(dataSet) {
 		enumerable   : false,
 		configurable : false,
 		writable     : false,
-		value        : function({ efk = [], sfa = aliases() }) {
-			console.log('system field and aliases: ', sfa);
-			console.log('external field headers: ', efk);
+		value        : function() {
+
+			console.log('system field and aliases: ', aliases());
+			console.log('external field headers: ', _dataSet);
 			return {};
 		}
 	});
