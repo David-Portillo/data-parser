@@ -4,8 +4,9 @@ import { constants, inspectionOutcome, showNotify } from './common.js';
 import { keyAdjutant } from './keyAdjutant.js';
 
 const interpretFile = ({ data }) => {
+
+	keyAdjutant(data).inspect();
 	//data = keyAdjutant(data).normalize('lower').remove([ '__empty', 'another' ]).val();
-	console.log(data);
 	return data;
 };
 
