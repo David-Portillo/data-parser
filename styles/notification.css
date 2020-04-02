@@ -1,44 +1,44 @@
 #notify {
   display: none;
-	justify-content: center;
-	align-items: center;
-	/* background-color: cadetblue; */
+  justify-content: center;
+  align-items: center;
+  /* background-color: cadetblue; */
   text-align: center;
-	padding: 20px 10px 0px 10px;
+  padding: 20px 10px 0px 10px;
 }
 
 .notify-error {
   background-color: lightcoral;
   box-shadow: 0px 2px 3px darkred;
-	height: 80px;
-	text-align: center;
-	padding-top: 15px;
-	user-select: none;
+  height: 80px;
+  text-align: center;
+  padding-top: 15px;
+  user-select: none;
   width: 525px;
 }
 
 .notify-success {
-	background-color: darkseagreen;
+  background-color: darkseagreen;
   box-shadow: 0px 2px 3px darkgreen;
-	height: 80px;
-	text-align: center;
-	padding-top: 15px;
-	user-select: none;
+  height: 80px;
+  text-align: center;
+  padding-top: 15px;
+  user-select: none;
   width: 525px;
 }
 
 #notify > div > :nth-child(2) {
-	display: block;
-	padding-right: 15px;
-	text-align: right;
-	user-select: none;
+  display: block;
+  padding-right: 15px;
+  text-align: right;
+  user-select: none;
 }
 
 #notify > p {
-	margin-top: 18px;
+  margin-top: 18px;
 }
 
 #notify-close {
-	font-weight: bold;
-	cursor: pointer;
+  font-weight: bold;
+  cursor: pointer;
 }

@@ -2,12 +2,12 @@
 
 ### Table of Contents
 
-* [Purpose](https://github.com/HammerHand92/data-parser#purpose)
-* [Plugins](https://github.com/HammerHand92/data-parser#plugins)
+- [Purpose](https://github.com/HammerHand92/data-parser#purpose)
+- [Plugins](https://github.com/HammerHand92/data-parser#plugins)
   - Moment
   - Ag-Grid
   - XLSX
-* Docs
+- Docs
   - [grid]()
   - [gridTooltip]()
   - [inspectionException]()
@@ -19,26 +19,24 @@
   - [validator]()
   - [index]()
 
------------
+---
+
 ## Purpose
 
------------
+---
 
 ## Plugins
 
- **[Moment.js]()**
+**[Moment.js]()**
 
- * Validates & converts date fields tothe desired format
+- Validates & converts date fields tothe desired format
 
- **[Ag-Grid]()**
+**[Ag-Grid]()**
 
- * manages data in a grid form
- * validates user inputs
- * highlights data errors, warnings, etc.
+- manages data in a grid form
+- validates user inputs
+- highlights data errors, warnings, etc.
 
- **[XLSX]()**
+**[XLSX]()**
 
- * Parses data files, data-parser uses it specifically for excel and csv formats)
-
-
-
+- Parses data files, data-parser uses it specifically for excel and csv formats)

@@ -24,7 +24,7 @@
   white-space: nowrap;
 }
 
-.tooltip-info p:nth-child(1){
+.tooltip-info p:nth-child(1) {
   font-weight: bold;
 }
 
